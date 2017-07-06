@@ -37,8 +37,8 @@ if (isset($_POST['hapus-contengan'])) {
   <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12">
       <ol class="breadcrumb">
-        <li><a href="index.php"><span class="fa fa-home"></span> Beranda</a></li>
-        <li class="active"><span class="fa fa-modx"></span> Nilai</li>
+        <li><a href="index.php">Beranda</a></li>
+        <li class="active">Nilai</li>
       </ol>
       <form method="post">
         <div class="row">
