@@ -45,46 +45,31 @@ $db = $config->getConnection();
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
               <li><a href="index.php">Home <span class="sr-only">(current)</span></a></li>
-              <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-file "></i> Input Data <span class="caret"></span></a>
-                  <ul class="dropdown-menu">
-                      <li role="presentation"><a href="nilai.php">Data Nilai</a></li>
-                      <li role="presentation"><a href="data-kriteria.php">Data Kriteria</a></li>
-                      <li role="presentation"><a href="data-alternatif.php">Data Alternatif</a></li>
-                  </ul>
-              </li>
-              <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-file "></i> Analisa Data <span class="caret"></span></a>
-                  <ul class="dropdown-menu">
-                      <li role="presentation"><a href="analisa-kriteria.php">Analisa Kriteria</a></li>
-                      <li role="presentation"><a href="analisa-alternatif.php">Analisa Alternatif</a></li>
-                      <li role="presentation"><a href="rangking.php">Rangking</a></li>
-                      <li role="presentation"><a href="laporan-cetak.php" target="_blank">Laporan</a></li>
-                  </ul>
-              </li>
-              <?php //if ($_SESSION["nama_lengkap"] == "Pegawai"): ?>
-                  <!-- <li><a href="?page=pegawai">Pegawai</a></li> -->
-              <?php //endif; ?>
+              <?php if ($_SESSION["role"] == "pegawai"): ?>
+                  <li role="presentation"><a href="data-alternatif.php">Alternatif</a></li>
+              <?php endif; ?>
 
-              <?php //if ($_SESSION["nama_lengkap"] == "Atasan"): ?>
-                  <!-- <li><a href="?page=kriteria">Kriteria</a></li>
-                  <li><a href="?page=nilai">Nilai Awal</a></li>
-                  <li><a href="?page=penilaian">Penilaian</a></li>
-                  <li><a href="?page=pengguna">Pengguna</a></li>
-                  <li><a href="?page=perhitungan">Perhitungan</a></li> -->
-              <?php //endif; ?>
+              <?php if ($_SESSION["role"] == "atasan"): ?>
+                  <li role="presentation"><a href="data-kriteria.php">Kriteria</a></li>
+                  <li role="presentation"><a href="nilai.php">Nilai</a></li>
+              <?php endif; ?>
 
-              <?php //if ($_SESSION["nama_lengkap"] == "Atasan" OR $_SESSION["role"] == "Manajer"): ?>
-                  <!-- <li class="dropdown">
+              <?php if ($_SESSION["role"] == "atasan" OR $_SESSION["role"] == "manajer"): ?>
+                  <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Analisan <span class="caret"></span></a>
+                      <ul class="dropdown-menu">
+                          <li role="presentation"><a href="analisa-kriteria.php">Kriteria</a></li>
+                          <li role="presentation"><a href="analisa-alternatif.php">Alternatif</a></li>
+                      </ul>
+                  </li>
+                  <li class="dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Laporan <span class="caret"></span></a>
                       <ul class="dropdown-menu">
-                          <li><a href="?page=pegawai&laporan">Pegawai</a></li>
-                          <li><a href="?page=kriteria&laporan">Kriteria</a></li>
-                          <li><a href="?page=penilaian&laporan">Penialain</a></li>
-                          <li><a href="?page=usulan&laporan">Usulan</a></li>
+                          <li role="presentation"><a href="rangking.php">Rangking</a></li>
+                          <li role="presentation"><a href="laporan-cetak.php" target="_blank">Laporan</a></li>
                       </ul>
-                  </li> -->
-              <?php //endif; ?>
+                  </li>
+              <?php endif; ?>
           </ul>
           <ul class="nav navbar-nav navbar-right">
               <li class="dropdown">
