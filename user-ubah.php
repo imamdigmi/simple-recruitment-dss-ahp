@@ -8,11 +8,12 @@ $eks = new User($db);
 $eks->id = $id;
 $eks->readOne();
 
-if($_POST){
+if ($_POST) {
   $eks->nl = $_POST['nl'];
+  $eks->rl = $_POST['rl'];
   $eks->un = $_POST['un'];
   $eks->pw = md5($_POST['pw']);
-  if($eks->update()){
+  if ($eks->update()) {
     echo "<script>location.href='user.php'</script>";
   } else { ?>
     <script type="text/javascript">
@@ -40,6 +41,14 @@ if($_POST){
           <div class="form-group">
             <label for="nl">Nama Lengkap</label>
             <input type="text" class="form-control" id="nl" name="nl" value="<?php echo $eks->nl; ?>">
+          </div>
+          <div class="form-group">
+            <label for="rl">Role</label>
+            <select class="form-control" name="rl" id="rl">
+              <option value="atasan"<?=($eks->rl == "atasan") ? "selected=\"on\"" : "" ?>>Atasan</option>
+              <option value="pegawai"<?=($eks->rl == "pegawai") ? "selected=\"on\"" : "" ?>>Pegawai</option>
+              <option value="manajer"<?=($eks->rl == "manajer") ? "selected=\"on\"" : "" ?>>Manajer</option>
+            </select>
           </div>
           <div class="form-group">
             <label for="un">Username</label>

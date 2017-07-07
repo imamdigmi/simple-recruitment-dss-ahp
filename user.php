@@ -6,7 +6,7 @@ $pro = new User($db);
 $stmt = $pro->readAll();
 $count = $pro->countAll();
 
-if(isset($_POST['hapus-contengan'])){
+if (isset($_POST['hapus-contengan'])) {
   $imp = "('".implode("','",array_values($_POST['checkbox']))."')";
   $result = $pro->hapusell($imp);
   if($result){ ?>
@@ -59,6 +59,7 @@ if(isset($_POST['hapus-contengan'])){
           <tr>
             <th width="10px"><input type="checkbox" name="select-all" id="select-all" /></th>
             <th>Nama Lengkap</th>
+            <th>Role</th>
             <th>Username</th>
             <th width="100px">Aksi</th>
           </tr>
@@ -67,6 +68,7 @@ if(isset($_POST['hapus-contengan'])){
           <tr>
             <th><input type="checkbox" name="select-all2" id="select-all2" /></th>
             <th>Nama Lengkap</th>
+            <th>Role</th>
             <th>Username</th>
             <th>Aksi</th>
           </tr>
@@ -76,6 +78,7 @@ if(isset($_POST['hapus-contengan'])){
             <tr>
               <td style="vertical-align:middle;"><input type="checkbox" value="<?php echo $row['id_pengguna'] ?>" name="checkbox[]" /></td>
         	    <td style="vertical-align:middle;"><?php echo $row['nama_lengkap'] ?></td>
+        	    <td style="vertical-align:middle;"><?php echo $row['role'] ?></td>
         	    <td style="vertical-align:middle;"><?php echo $row['username'] ?></td>
               <td class="text-center" style="vertical-align:middle;">
                 <div class="btn-group">

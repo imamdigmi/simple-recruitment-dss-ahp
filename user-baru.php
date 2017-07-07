@@ -1,14 +1,16 @@
 <?php
 include_once('includes/header.inc.php');
 
-if($_POST){
+if ($_POST) {
   include_once('includes/user.inc.php');
   $eks = new User($db);
   $eks->nl = $_POST['nl'];
+  $eks->rl = $_POST['rl'];
   $eks->un = $_POST['un'];
   $eks->pw = md5($_POST['pw']);
-  if($eks->pw == md5($_POST['up'])){
-    if($eks->insert()){ ?>
+
+  if ($eks->pw == md5($_POST['up'])) {
+    if ($eks->insert()) { ?>
       <script type="text/javascript">
         window.onload=function(){
           showStickySuccessToast();
@@ -21,7 +23,7 @@ if($_POST){
         };
       </script> <?php
     }
-  } else{ ?>
+  } else { ?>
     <script type="text/javascript">
       window.onload=function(){
         showStickyWarningToast();
@@ -30,6 +32,7 @@ if($_POST){
   }
 }
 ?>
+
 <div class="row">
   <div class="col-xs-12 col-sm-12 col-md-12">
 	  <ol class="breadcrumb">
@@ -46,6 +49,15 @@ if($_POST){
           <div class="form-group">
             <label for="nl">Nama Lengkap</label>
             <input type="text" class="form-control" id="nl" name="nl" required>
+          </div>
+          <div class="form-group">
+            <label for="rl">Role</label>
+            <select class="form-control" name="rl" id="rl" required>
+              <option value="">----</option>
+              <option value="atasan">Atasan</option>
+              <option value="pegawai">Pegawai</option>
+              <option value="manajer">Manajer</option>
+            </select>
           </div>
           <div class="form-group">
             <label for="un">Username</label>
