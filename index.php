@@ -73,7 +73,8 @@ $stmt5 = $pro5->readAll();
 		</div>
 	</div>
 
-	<footer class="text-center">&copy; 2015</footer>
+	<hr>
+	<footer class="text-center">Copyright &copy; 2017 PT. Global Eushanosoft</footer>
 
 	</div>
 
