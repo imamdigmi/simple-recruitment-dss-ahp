@@ -19,8 +19,11 @@ $pro5 = new Bobot($db);
 $stmt5 = $pro5->readAll();
 ?>
 	<div class="row">
-		<br><br><br>
 		<div class="col-xs-12 col-sm-12 col-md-12">
+			<div class="jumbotron">
+			    <h1>Selamat datang!</h1>
+			    <p>Pemilihan pegawai terbaik PT. Global Eushanosoft</p>
+			</div>
 			<div id="container2" style="min-width: 100%; height: 400px; margin: 0 auto"></div>
 			<br/>
 			<div class="row">
