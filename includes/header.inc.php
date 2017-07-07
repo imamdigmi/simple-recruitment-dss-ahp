@@ -65,7 +65,7 @@ $db = $config->getConnection();
                   <li class="dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Laporan <span class="caret"></span></a>
                       <ul class="dropdown-menu">
-                          <li role="presentation"><a href="rangking.php">Rangking</a></li>
+                          <li role="presentation"><a href="ranking.php">Ranking</a></li>
                           <li role="presentation"><a href="laporan-cetak.php" target="_blank">Laporan</a></li>
                       </ul>
                   </li>

@@ -1,25 +1,24 @@
 <?php
 require('includes/fpdf/fpdf.php');
 
-class PDF extends FPDF{
-	
+class PDF extends FPDF {
 	function PDF($orientation='P', $unit='mm', $size='A4'){
 	    $this->FPDF($orientation,$unit,$size);
 	}
-	
+
 	function Header(){
 	    $this->SetFont('Times','B',14);
 	    $this->Cell(80);
 	    $this->Cell(30,10,'LAPORAN SISTEM PENDUKUNG KEPUTUSAN',0,0,'C');
 	    $this->Ln(20);
 	}
-	
+
 	function Footer(){
 	    $this->SetY(-15);
 	    $this->SetFont('Times','',8);
 	    $this->Cell(0,10,$this->PageNo(),0,0,'R');
 	}
-	
+
 }
 
 include "includes/config.php";
@@ -38,8 +37,8 @@ include_once 'includes/kriteria.inc.php';
 $pro2 = new Kriteria($db);
 $stmt2 = $pro2->readAll();
 $stmt2y = $pro2->readAll();
-include_once 'includes/rangking.inc.php';
-$pro = new Rangking($db);
+include_once 'includes/ranking.inc.php';
+$pro = new Ranking($db);
 $stmt = $pro->readKhusus();
 $stmty = $pro->readKhusus();
 $count = $pro->countAll();

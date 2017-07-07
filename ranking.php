@@ -11,8 +11,8 @@ $pro2 = new Kriteria($db);
 $stmt2 = $pro2->readAll();
 $stmt2y = $pro2->readAll();
 
-include_once('includes/rangking.inc.php');
-$pro = new Rangking($db);
+include_once('includes/ranking.inc.php');
+$pro = new Ranking($db);
 $stmt = $pro->readKhusus();
 $stmty = $pro->readKhusus();
 $count = $pro->countAll();

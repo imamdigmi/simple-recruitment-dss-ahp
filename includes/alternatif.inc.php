@@ -1,43 +1,39 @@
 <?php
-class Alternatif{
-
+class Alternatif {
 	private $conn;
-	private $table_name = "ahp_data_alternatif";
+	private $table_name = "data_alternatif";
 
 	public $id;
 	public $nm;
 	public $sa;
 	public $hs;
 
-	public function __construct($db){
+	public function __construct($db) {
 		$this->conn = $db;
 	}
 
-	function insert(){
-
-		$query = "insert into ".$this->table_name." values(?,?,'')";
+	function insert() {
+		$query = "INSERT INTO ".$this->table_name." values(?,?,'')";
 		$stmt = $this->conn->prepare($query);
 		$stmt->bindParam(1, $this->id);
 		$stmt->bindParam(2, $this->nm);
 
-		if($stmt->execute()){
+		if ($stmt->execute()) {
 			return true;
-		}else{
+		} else {
 			return false;
 		}
-
 	}
 
-	function readAll(){
-
+	function readAll() {
 		$query = "SELECT * FROM ".$this->table_name." ORDER BY id_alternatif ASC";
 		$stmt = $this->conn->prepare( $query );
 		$stmt->execute();
 
 		return $stmt;
 	}
-	function countAll(){
 
+	function countAll(){
 		$query = "SELECT * FROM ".$this->table_name." ORDER BY id_alternatif ASC";
 		$stmt = $this->conn->prepare( $query );
 		$stmt->execute();
@@ -46,7 +42,6 @@ class Alternatif{
 	}
 
 	function readOne(){
-
 		$query = "SELECT * FROM " . $this->table_name . " WHERE id_alternatif=? LIMIT 0,1";
 
 		$stmt = $this->conn->prepare( $query );
@@ -62,10 +57,8 @@ class Alternatif{
 	}
 
 	// update the product
-	function update(){
-
-		$query = "UPDATE
-					" . $this->table_name . "
+	function update() {
+		$query = "UPDATE ".$this->table_name."
 				SET
 					nama_alternatif = :nm
 				WHERE
@@ -77,38 +70,31 @@ class Alternatif{
 		$stmt->bindParam(':id', $this->id);
 
 		// execute the query
-		if($stmt->execute()){
+		if ($stmt->execute()) {
 			return true;
-		}else{
+		} else {
 			return false;
 		}
 	}
 
 	// delete the product
-	function delete(){
-
-		$query = "DELETE FROM " . $this->table_name . " WHERE id_alternatif = ?";
-
+	function delete() {
+		$query = "DELETE FROM ".$this->table_name." WHERE id_alternatif = ?";
 		$stmt = $this->conn->prepare($query);
 		$stmt->bindParam(1, $this->id);
-
-		if($result = $stmt->execute()){
+		if ($result = $stmt->execute()) {
 			return true;
-		}else{
+		} else {
 			return false;
 		}
 	}
-	function hapusell($ax){
-
-		$query = "DELETE FROM " . $this->table_name . " WHERE id_alternatif in $ax";
-
+	function hapusell($ax) {
+		$query = "DELETE FROM ".$this->table_name." WHERE id_alternatif in $ax";
 		$stmt = $this->conn->prepare($query);
-
-		if($result = $stmt->execute()){
+		if ($result = $stmt->execute()) {
 			return true;
-		}else{
+		} else {
 			return false;
 		}
 	}
 }
-?>
