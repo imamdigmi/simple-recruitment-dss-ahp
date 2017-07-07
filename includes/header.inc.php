@@ -1,8 +1,8 @@
 <?php
-include "includes/config.php";
+include("includes/config.php");
 session_start();
 if (!isset($_SESSION['nama_lengkap'])) {
-echo "<script>location.href='login.php'</script>";
+  echo "<script>location.href='login.php'</script>";
 }
 $config = new Config();
 $db = $config->getConnection();
@@ -48,18 +48,18 @@ $db = $config->getConnection();
               <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-file "></i> Input Data <span class="caret"></span></a>
                   <ul class="dropdown-menu">
-                      <li role="presentation"><a href="nilai.php"><span class="fa fa-modx"></span> Data Nilai</a></li>
-                      <li role="presentation"><a href="data-kriteria.php"><span class="fa fa-bank"></span> Data Kriteria</a></li>
-                      <li role="presentation"><a href="data-alternatif.php"><span class="fa fa-book"></span> Data Alternatif</a></li>
+                      <li role="presentation"><a href="nilai.php">Data Nilai</a></li>
+                      <li role="presentation"><a href="data-kriteria.php">Data Kriteria</a></li>
+                      <li role="presentation"><a href="data-alternatif.php">Data Alternatif</a></li>
                   </ul>
               </li>
               <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-file "></i> Analisa Data <span class="caret"></span></a>
                   <ul class="dropdown-menu">
-                      <li role="presentation"><a href="analisa-kriteria.php"><span class="fa fa-bomb"></span> Analisa Kriteria</a></li>
-                      <li role="presentation"><a href="analisa-alternatif.php"><span class="fa fa-balance-scale"></span> Analisa Alternatif</a></li>
-                      <li role="presentation"><a href="rangking.php"><span class="fa fa-bolt"></span> Rangking</a></li>
-                      <li role="presentation"><a href="laporan-cetak.php" target="_blank"><span class="fa fa-file-pdf-o"></span> Laporan</a></li>
+                      <li role="presentation"><a href="analisa-kriteria.php">Analisa Kriteria</a></li>
+                      <li role="presentation"><a href="analisa-alternatif.php">Analisa Alternatif</a></li>
+                      <li role="presentation"><a href="rangking.php">Rangking</a></li>
+                      <li role="presentation"><a href="laporan-cetak.php" target="_blank">Laporan</a></li>
                   </ul>
               </li>
               <?php //if ($_SESSION["nama_lengkap"] == "Pegawai"): ?>
@@ -90,10 +90,10 @@ $db = $config->getConnection();
               <li class="dropdown">
                   <a href="#" class="dropdown-toggle text-red text-bold" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?=$_SESSION["nama_lengkap"]?> <span class="caret"></span></a>
                   <ul class="dropdown-menu">
-                      <li><a href="profil.php"><span class="fa fa-user"></span> Profil</a></li>
-                      <li><a href="user.php"><span class="fa fa-users"></span> Manejer Pengguna</a></li>
+                      <li><a href="profil.php">Profil</a></li>
+                      <li><a href="user.php">Manejer Pengguna</a></li>
                       <li role="separator" class="divider"></li>
-                      <li><a href="logout.php"><span class="fa fa-sign-out"></span> Logout</a></li>
+                      <li><a href="logout.php">Logout</a></li>
                   </ul>
               </li>
           </ul>
