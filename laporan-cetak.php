@@ -63,7 +63,7 @@ $pdf->ln();
 $pdf->SetFont('Times','',12);
 
 while ($row1 = $stmt1->fetch(PDO::FETCH_ASSOC)){
-	$pdf->Cell(40,7,$row1['nama_alternatif'],1,0,'L');
+	$pdf->Cell(40,7,$row1['nama'],1,0,'L');
 	$aj= $row1['id_alternatif'];
 	$stmt21 = $pro2->readAll();
 	while ($row21 = $stmt21->fetch(PDO::FETCH_ASSOC)){
@@ -96,7 +96,7 @@ $pdf->ln();
 $pdf->SetFont('Times','',12);
 
 while ($row1 = $stmt1y->fetch(PDO::FETCH_ASSOC)){
-	$pdf->Cell(40,7,$row1['nama_alternatif'],1,0,'L');
+	$pdf->Cell(40,7,$row1['nama'],1,0,'L');
 	$a1= $row1['id_alternatif'];
 	$stmt21 = $pro2->readAll();
 	while ($row21 = $stmt21->fetch(PDO::FETCH_ASSOC)){
