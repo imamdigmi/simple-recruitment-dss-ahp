@@ -62,14 +62,14 @@ if(isset($altkriteria)){
 					<tr>
 					<th><?php echo $pro->kri ?></th>
 					<?php while ($row2 = $stmt2->fetch(PDO::FETCH_ASSOC)): ?>
-						<th><?php echo $row2['nama_alternatif'] ?></th>
+						<th><?php echo $row2['nama'] ?></th>
 					<?php endwhile; ?>
 					</tr>
         </thead>
 				<tbody>
 				<?php while ($row3 = $stmt3->fetch(PDO::FETCH_ASSOC)): ?>
 					<tr>
-					<th style="vertical-align:middle;"><?php echo $row3['nama_alternatif'] ?></th>
+					<th style="vertical-align:middle;"><?php echo $row3['nama'] ?></th>
 					<?php $stmt4 = $pro->readAll2(); while ($row4 = $stmt4->fetch(PDO::FETCH_ASSOC)): ?>
 						<td style="vertical-align:middle;">
 						<?php
@@ -116,7 +116,7 @@ if(isset($altkriteria)){
 	      <tr>
           <th>Perbandingan</th>
           <?php $stmt2x = $pro->readAll2(); $stmt3x = $pro->readAll2(); while ($row2x = $stmt2x->fetch(PDO::FETCH_ASSOC)): ?>
-	          <th><?php echo $row2x['nama_alternatif'] ?></th>
+	          <th><?php echo $row2x['nama'] ?></th>
           <?php endwhile; ?>
           <th>Skor</th>
 	      </tr>
@@ -124,7 +124,7 @@ if(isset($altkriteria)){
       <tbody>
 			<?php while ($row3x = $stmt3x->fetch(PDO::FETCH_ASSOC)): ?>
         <tr>
-          <th style="vertical-align:middle;"><?php echo $row3x['nama_alternatif'] ?></th>
+          <th style="vertical-align:middle;"><?php echo $row3x['nama'] ?></th>
           <?php $stmt4x = $pro->readAll2(); while ($row4x = $stmt4x->fetch(PDO::FETCH_ASSOC)): ?>
             <td style="vertical-align:middle;">
             	<?php

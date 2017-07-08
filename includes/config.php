@@ -3,7 +3,7 @@ class Config {
   private $host = "localhost";
   private $db_name = "employees";
   private $username = "root";
-  private $password = "";
+  private $password = "idiot";
   public $conn;
 
   public function getConnection() {

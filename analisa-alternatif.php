@@ -110,7 +110,7 @@ window.onload=function(){
 						<div class="col-xs-12 col-md-3">
 							<div class="form-group">
 							<?php $stmt2 = $pro1->readAlternatif('A1'); while ($row1 = $stmt2->fetch(PDO::FETCH_ASSOC)): ?>
-								<input type="text" class="form-control" value="<?php echo $row1['nama_alternatif'] ?>" readonly />
+								<input type="text" class="form-control" value="<?php echo $row1['nama'] ?>" readonly />
 								<input type="hidden" name="A11" value="<?php echo $row1['id_alternatif'] ?>" />
 							<?php endwhile; ?>
 							</div>
@@ -127,7 +127,7 @@ window.onload=function(){
 						<div class="col-xs-12 col-md-3">
 							<div class="form-group">
 							<?php $stmt3 = $pro1->readAlternatif('A2'); while ($row3 = $stmt3->fetch(PDO::FETCH_ASSOC)): ?>
-								<input type="text" class="form-control" value="<?php echo $row3['nama_alternatif'] ?>" readonly />
+								<input type="text" class="form-control" value="<?php echo $row3['nama'] ?>" readonly />
 								<input type="hidden" name="A21" value="<?php echo $row3['id_alternatif'] ?>" />
 							<?php endwhile; ?>
 							</div>
@@ -138,7 +138,7 @@ window.onload=function(){
 						<div class="col-xs-12 col-md-3">
 							<div class="form-group">
 							<?php $stmt2 = $pro1->readAlternatif('A1'); while ($row1 = $stmt2->fetch(PDO::FETCH_ASSOC)): ?>
-								<input type="text" class="form-control" value="<?php echo $row1['nama_alternatif'] ?>" readonly />
+								<input type="text" class="form-control" value="<?php echo $row1['nama'] ?>" readonly />
 								<input type="hidden" name="A12" value="<?php echo $row1['id_alternatif'] ?>" />
 							<?php endwhile; ?>
 							</div>
@@ -155,7 +155,7 @@ window.onload=function(){
 						<div class="col-xs-12 col-md-3">
 							<div class="form-group">
 							<?php $stmt3 = $pro1->readAlternatif('A3'); while ($row3 = $stmt3->fetch(PDO::FETCH_ASSOC)): ?>
-								<input type="text" class="form-control" value="<?php echo $row3['nama_alternatif'] ?>" readonly />
+								<input type="text" class="form-control" value="<?php echo $row3['nama'] ?>" readonly />
 								<input type="hidden" name="A32" value="<?php echo $row3['id_alternatif'] ?>" />
 							<?php endwhile; ?>
 							</div>
@@ -166,7 +166,7 @@ window.onload=function(){
 						<div class="col-xs-12 col-md-3">
 							<div class="form-group">
 							<?php $stmt2 = $pro1->readAlternatif('A1'); while ($row1 = $stmt2->fetch(PDO::FETCH_ASSOC)): ?>
-								<input type="text" class="form-control" value="<?php echo $row1['nama_alternatif'] ?>" readonly />
+								<input type="text" class="form-control" value="<?php echo $row1['nama'] ?>" readonly />
 								<input type="hidden" name="A13" value="<?php echo $row1['id_alternatif'] ?>" />
 							<?php endwhile; ?>
 							</div>
@@ -183,7 +183,7 @@ window.onload=function(){
 						<div class="col-xs-12 col-md-3">
 							<div class="form-group">
 							<?php $stmt3 = $pro1->readAlternatif('A4'); while ($row3 = $stmt3->fetch(PDO::FETCH_ASSOC)): ?>
-								<input type="text" class="form-control" value="<?php echo $row3['nama_alternatif'] ?>" readonly />
+								<input type="text" class="form-control" value="<?php echo $row3['nama'] ?>" readonly />
 								<input type="hidden" name="A43" value="<?php echo $row3['id_alternatif'] ?>" />
 							<?php endwhile; ?>
 							</div>
@@ -194,7 +194,7 @@ window.onload=function(){
 						<div class="col-xs-12 col-md-3">
 							<div class="form-group">
 							<?php $stmt2 = $pro1->readAlternatif('A1'); while ($row1 = $stmt2->fetch(PDO::FETCH_ASSOC)): ?>
-								<input type="text" class="form-control" value="<?php echo $row1['nama_alternatif'] ?>" readonly />
+								<input type="text" class="form-control" value="<?php echo $row1['nama'] ?>" readonly />
 								<input type="hidden" name="A14" value="<?php echo $row1['id_alternatif'] ?>" />
 							<?php endwhile; ?>
 							</div>
@@ -211,7 +211,7 @@ window.onload=function(){
 						<div class="col-xs-12 col-md-3">
 							<div class="form-group">
 							<?php $stmt3 = $pro1->readAlternatif('A5'); while ($row3 = $stmt3->fetch(PDO::FETCH_ASSOC)): ?>
-								<input type="text" class="form-control" value="<?php echo $row3['nama_alternatif'] ?>" readonly />
+								<input type="text" class="form-control" value="<?php echo $row3['nama'] ?>" readonly />
 								<input type="hidden" name="A54" value="<?php echo $row3['id_alternatif'] ?>" />
 							<?php endwhile; ?>
 							</div>
@@ -222,7 +222,7 @@ window.onload=function(){
 						<div class="col-xs-12 col-md-3">
 							<div class="form-group">
 							<?php $stmt2 = $pro1->readAlternatif('A2'); while ($row1 = $stmt2->fetch(PDO::FETCH_ASSOC)): ?>
-								<input type="text" class="form-control" value="<?php echo $row1['nama_alternatif'] ?>" readonly />
+								<input type="text" class="form-control" value="<?php echo $row1['nama'] ?>" readonly />
 								<input type="hidden" name="A25" value="<?php echo $row1['id_alternatif'] ?>" />
 							<?php endwhile; ?>
 							</div>
@@ -239,7 +239,7 @@ window.onload=function(){
 						<div class="col-xs-12 col-md-3">
 							<div class="form-group">
 							<?php $stmt3 = $pro1->readAlternatif('A3'); while ($row3 = $stmt3->fetch(PDO::FETCH_ASSOC)): ?>
-								<input type="text" class="form-control" value="<?php echo $row3['nama_alternatif'] ?>" readonly />
+								<input type="text" class="form-control" value="<?php echo $row3['nama'] ?>" readonly />
 								<input type="hidden" name="A35" value="<?php echo $row3['id_alternatif'] ?>" />
 							<?php endwhile; ?>
 							</div>
@@ -250,7 +250,7 @@ window.onload=function(){
 						<div class="col-xs-12 col-md-3">
 							<div class="form-group">
 							<?php $stmt2 = $pro1->readAlternatif('A2'); while ($row1 = $stmt2->fetch(PDO::FETCH_ASSOC)): ?>
-								<input type="text" class="form-control" value="<?php echo $row1['nama_alternatif'] ?>" readonly />
+								<input type="text" class="form-control" value="<?php echo $row1['nama'] ?>" readonly />
 								<input type="hidden" name="A26" value="<?php echo $row1['id_alternatif'] ?>" />
 							<?php endwhile; ?>
 							</div>
@@ -267,7 +267,7 @@ window.onload=function(){
 						<div class="col-xs-12 col-md-3">
 							<div class="form-group">
 							<?php $stmt3 = $pro1->readAlternatif('A4'); while ($row3 = $stmt3->fetch(PDO::FETCH_ASSOC)): ?>
-								<input type="text" class="form-control" value="<?php echo $row3['nama_alternatif'] ?>" readonly />
+								<input type="text" class="form-control" value="<?php echo $row3['nama'] ?>" readonly />
 								<input type="hidden" name="A46" value="<?php echo $row3['id_alternatif'] ?>" />
 							<?php endwhile; ?>
 							</div>
@@ -278,7 +278,7 @@ window.onload=function(){
 						<div class="col-xs-12 col-md-3">
 							<div class="form-group">
 							<?php $stmt2 = $pro1->readAlternatif('A2'); while ($row1 = $stmt2->fetch(PDO::FETCH_ASSOC)): ?>
-								<input type="text" class="form-control" value="<?php echo $row1['nama_alternatif'] ?>" readonly />
+								<input type="text" class="form-control" value="<?php echo $row1['nama'] ?>" readonly />
 								<input type="hidden" name="A27" value="<?php echo $row1['id_alternatif'] ?>" />
 							<?php endwhile; ?>
 							</div>
@@ -295,7 +295,7 @@ window.onload=function(){
 						<div class="col-xs-12 col-md-3">
 							<div class="form-group">
 							<?php $stmt3 = $pro1->readAlternatif('A5'); while ($row3 = $stmt3->fetch(PDO::FETCH_ASSOC)): ?>
-								<input type="text" class="form-control" value="<?php echo $row3['nama_alternatif'] ?>" readonly />
+								<input type="text" class="form-control" value="<?php echo $row3['nama'] ?>" readonly />
 								<input type="hidden" name="A57" value="<?php echo $row3['id_alternatif'] ?>" />
 							<?php endwhile; ?>
 							</div>
@@ -306,7 +306,7 @@ window.onload=function(){
 						<div class="col-xs-12 col-md-3">
 							<div class="form-group">
 							<?php $stmt2 = $pro1->readAlternatif('A3'); while ($row1 = $stmt2->fetch(PDO::FETCH_ASSOC)): ?>
-								<input type="text" class="form-control" value="<?php echo $row1['nama_alternatif'] ?>" readonly />
+								<input type="text" class="form-control" value="<?php echo $row1['nama'] ?>" readonly />
 								<input type="hidden" name="A38" value="<?php echo $row1['id_alternatif'] ?>" />
 							<?php endwhile; ?>
 							</div>
@@ -323,7 +323,7 @@ window.onload=function(){
 						<div class="col-xs-12 col-md-3">
 							<div class="form-group">
 							<?php $stmt3 = $pro1->readAlternatif('A4'); while ($row3 = $stmt3->fetch(PDO::FETCH_ASSOC)): ?>
-								<input type="text" class="form-control" value="<?php echo $row3['nama_alternatif'] ?>" readonly />
+								<input type="text" class="form-control" value="<?php echo $row3['nama'] ?>" readonly />
 								<input type="hidden" name="A48" value="<?php echo $row3['id_alternatif'] ?>" />
 							<?php endwhile; ?>
 							</div>
@@ -334,7 +334,7 @@ window.onload=function(){
 						<div class="col-xs-12 col-md-3">
 							<div class="form-group">
 							<?php $stmt2 = $pro1->readAlternatif('A3'); while ($row1 = $stmt2->fetch(PDO::FETCH_ASSOC)): ?>
-								<input type="text" class="form-control" value="<?php echo $row1['nama_alternatif'] ?>" readonly />
+								<input type="text" class="form-control" value="<?php echo $row1['nama'] ?>" readonly />
 								<input type="hidden" name="A39" value="<?php echo $row1['id_alternatif'] ?>" />
 							<?php endwhile; ?>
 							</div>
@@ -351,7 +351,7 @@ window.onload=function(){
 						<div class="col-xs-12 col-md-3">
 							<div class="form-group">
 							<?php $stmt3 = $pro1->readAlternatif('A5'); while ($row3 = $stmt3->fetch(PDO::FETCH_ASSOC)): ?>
-								<input type="text" class="form-control" value="<?php echo $row3['nama_alternatif'] ?>" readonly />
+								<input type="text" class="form-control" value="<?php echo $row3['nama'] ?>" readonly />
 								<input type="hidden" name="A59" value="<?php echo $row3['id_alternatif'] ?>" />
 							<?php endwhile; ?>
 							</div>
@@ -362,7 +362,7 @@ window.onload=function(){
 						<div class="col-xs-12 col-md-3">
 							<div class="form-group">
 							<?php $stmt2 = $pro1->readAlternatif('A4'); while ($row1 = $stmt2->fetch(PDO::FETCH_ASSOC)): ?>
-								<input type="text" class="form-control" value="<?php echo $row1['nama_alternatif'] ?>" readonly />
+								<input type="text" class="form-control" value="<?php echo $row1['nama'] ?>" readonly />
 								<input type="hidden" name="A410" value="<?php echo $row1['id_alternatif'] ?>" />
 							<?php endwhile; ?>
 							</div>
@@ -379,7 +379,7 @@ window.onload=function(){
 						<div class="col-xs-12 col-md-3">
 							<div class="form-group">
 							<?php $stmt3 = $pro1->readAlternatif('A5'); while ($row3 = $stmt3->fetch(PDO::FETCH_ASSOC)): ?>
-								<input type="text" class="form-control" value="<?php echo $row3['nama_alternatif'] ?>" readonly />
+								<input type="text" class="form-control" value="<?php echo $row3['nama'] ?>" readonly />
 								<input type="hidden" name="A510" value="<?php echo $row3['id_alternatif'] ?>" />
 							<?php endwhile; ?>
 							</div>

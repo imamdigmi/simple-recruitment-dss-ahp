@@ -1,12 +1,22 @@
 <?php
 include_once('includes/header.inc.php');
 
+include_once('includes/alternatif.inc.php');
+$altObj = new Alternatif($db);
+
 if($_POST){
-	include_once('includes/alternatif.inc.php');
-	$eks = new Alternatif($db);
-	$eks->id = $_POST['kd'];
-	$eks->nm = $_POST['nm'];
-	if($eks->insert()){ ?>
+	$altObj->$id = $_POST["id_alternatif"];
+	$altObj->$nik = $_POST["nik"];
+	$altObj->$nama = $_POST["nama"];
+	$altObj->$tempat_lahir = $_POST["tempat_lahir"];
+	$altObj->$tanggal_lahir = $_POST["tanggal_lahir"];
+	$altObj->$kelamin = $_POST["kelamin"];
+	$altObj->$alamat = $_POST["alamat"];
+	$altObj->$jabatan = $_POST["jabatan"];
+	$altObj->$tanggal_masuk = $_POST["tanggal_masuk"];
+	$altObj->$pendidikan = $_POST["pendidikan"];
+
+	if($altObj->insert()){ ?>
 		<script type="text/javascript">
 			window.onload=function(){
 				showStickySuccessToast();
@@ -35,19 +45,49 @@ if($_POST){
 			<div class="panel-body">
 				    <form method="post">
 						  <div class="form-group">
-						    <label for="kd">ID Alternatif</label>
-						    <select class="form-control" id="kd" name="kd">
-									<option>A1</option>
-									<option>A2</option>
-									<option>A3</option>
-									<option>A4</option>
-									<option>A5</option>
-								</select>
+						    <label for="id_alternatif">ID Alternatif</label>
+						    <input type="text" class="form-control" id="id_alternatif" name="id_alternatif" required readonly="on" value="<?php echo $altObj->getNewID(); ?>">
 						  </div>
-						  <div class="form-group">
-						    <label for="kt">Nama Alternatif</label>
-						    <input type="text" class="form-control" id="nm" name="nm" required>
-						  </div>
+							<div class="form-group">
+									<label for="nik">Nomor Induk Karyawan</label>
+									<input type="text" name="nik" id="nik" class="form-control" autofocus="on" required="on">
+							</div>
+							<div class="form-group">
+									<label for="nama">Nama Lengkap</label>
+									<input type="text" name="nama" id="nama" class="form-control" required="on">
+							</div>
+							<div class="form-group">
+									<label for="tempat_lahir">Tempat Lahir</label>
+									<input type="text" name="tempat_lahir" id="tempat_lahir" class="form-control" required="on">
+							</div>
+							<div class="form-group">
+									<label for="tanggal_lahir">Tanggal Lahir</label>
+									<input type="text" name="tanggal_lahir" id="tanggal_lahir" class="form-control datepicker" required="on">
+							</div>
+							<div class="form-group">
+									<label for="kelamin">Jenis Kelamin</label>
+									<select class="form-control" name="kelamin" id="kelamin" required="on">
+											<option value="">---</option>
+											<option value="Pria">Pria</option>
+											<option value="Wanita">Wanita</option>
+									</select>
+							</div>
+							<div class="form-group">
+									<label for="alamat">Alamat</label>
+									<input type="text" name="alamat" id="alamat" class="form-control" required="on">
+							</div>
+							<div class="form-group">
+									<label for="jabatan">Jabatan</label>
+									<input type="text" name="jabatan" id="jabatan" class="form-control" required="on">
+							</div>
+							<div class="form-group">
+									<label for="tanggal_masuk">Tanggal Masuk</label>
+									<input type="text" name="tanggal_masuk" id="tanggal_masuk" class="form-control datepicker" required="on">
+							</div>
+							<div class="form-group">
+									<label for="pendidikan">Pendidikan</label>
+									<input type="text" name="pendidikan" id="pendidikan" class="form-control" required="on">
+							</div>
 							<div class="btn-group">
 							  <button type="submit" class="btn btn-dark">Simpan</button>
 							  <button type="button" onclick="location.href='data-alternatif.php'" class="btn btn-default">Kembali</button>

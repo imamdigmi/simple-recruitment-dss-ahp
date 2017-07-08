@@ -15,7 +15,7 @@ $db = $config->getConnection();
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Pemilihan Pegawai Terbaik</title>
     <link type="text/css" rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <!-- <link rel="stylesheet" href="assets/css/bootstrap-datepicker.min.css"> -->
+    <link type="text/css" rel="stylesheet" href="assets/css/bootstrap-datepicker.min.css">
     <link type="text/css" rel="stylesheet" href="assets/css/dataTables.bootstrap.min.css">
     <link type="text/css" rel="stylesheet" href="assets/css/jquery.toastmessage.css"/>
     <link type="text/css" rel="stylesheet" href="assets/css/font-awesome.min.css">
@@ -46,7 +46,7 @@ $db = $config->getConnection();
           <ul class="nav navbar-nav">
               <li><a href="index.php">Home <span class="sr-only">(current)</span></a></li>
               <?php if ($_SESSION["role"] == "pegawai"): ?>
-                  <li role="presentation"><a href="data-alternatif.php">Alternatif</a></li>
+                  <li role="presentation"><a href="data-alternatif.php">Pegawai</a></li>
               <?php endif; ?>
 
               <?php if ($_SESSION["role"] == "atasan"): ?>

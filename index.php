@@ -63,7 +63,7 @@ $stmt5 = $pro5->readAll();
 						<div class="panel-body">
 							<ol>
 							<?php while ($row1 = $stmt1->fetch(PDO::FETCH_ASSOC)) :?>
-								<li><?php echo $row1['nama_alternatif'] ?></li>
+								<li><?php echo $row1['nama'] ?></li>
 							<?php endwhile; ?>
 							</ol>
 						</div>
@@ -105,7 +105,7 @@ $stmt5 = $pro5->readAll();
 				<?php while ($row4 = $stmt4->fetch(PDO::FETCH_ASSOC)) : ?>
 					//data yang diambil dari database dimasukan ke variable nama dan data
 					{
-						name: '<?php echo $row4['nama_alternatif'] ?>',
+						name: '<?php echo $row4['nama'] ?>',
 						data: [<?php echo $row4['hasil_akhir'] ?>]
 					},
 				<?php endwhile; ?>

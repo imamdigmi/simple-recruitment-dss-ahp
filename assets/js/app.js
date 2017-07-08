@@ -1,5 +1,6 @@
 $(document).ready(function() {
   $('#tabeldata').DataTable();
+  $(".datepicker").datepicker({ format: "yyyy-mm-dd" });
 });
 
 function showSuccessToast() {

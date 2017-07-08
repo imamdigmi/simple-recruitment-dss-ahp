@@ -59,7 +59,14 @@ if (isset($_POST['hapus-contengan'])) {
         <tr>
           <th width="10px"><input type="checkbox" name="select-all" id="select-all" /></th>
           <th>ID Alternatif</th>
-          <th>Nama Alternatif</th>
+          <th>Nik</th>
+          <th>Nama</th>
+          <th>Tempat, Tanggal Lahir</th>
+          <th>Kelamin</th>
+          <th>Alamat</th>
+          <th>Jabatan</th>
+          <th>Tanggal Masuk</th>
+          <th>Pendidikan</th>
           <th>Hasil Akhir</th>
           <th width="100px">Aksi</th>
         </tr>
@@ -68,7 +75,14 @@ if (isset($_POST['hapus-contengan'])) {
           <tr>
             <th><input type="checkbox" name="select-all2" id="select-all2" /></th>
             <th>ID Alternatif</th>
-            <th>Nama Alternatif</th>
+            <th>Nik</th>
+            <th>Nama</th>
+            <th>Tempat, Tanggal Lahir</th>
+            <th>Kelamin</th>
+            <th>Alamat</th>
+            <th>Jabatan</th>
+            <th>Tanggal Masuk</th>
+            <th>Pendidikan</th>
             <th>Hasil Akhir</th>
             <th>Aksi</th>
           </tr>
@@ -78,7 +92,14 @@ if (isset($_POST['hapus-contengan'])) {
             <tr>
               <td style="vertical-align:middle;"><input type="checkbox" value="<?php echo $row['id_alternatif'] ?>" name="checkbox[]" /></td>
               <td style="vertical-align:middle;"><?php echo $row['id_alternatif'] ?></td>
-              <td style="vertical-align:middle;"><?php echo $row['nama_alternatif'] ?></td>
+              <td style="vertical-align:middle;"><?php echo $row['nik'] ?></td>
+              <td style="vertical-align:middle;"><?php echo $row['nama'] ?></td>
+              <td style="vertical-align:middle;"><?php echo $row['tempat_lahir'] ?>, <?php echo $row['tanggal_lahir'] ?></td>
+              <td style="vertical-align:middle;"><?php echo $row['kelamin'] ?></td>
+              <td style="vertical-align:middle;"><?php echo $row['alamat'] ?></td>
+              <td style="vertical-align:middle;"><?php echo $row['jabatan'] ?></td>
+              <td style="vertical-align:middle;"><?php echo $row['tanggal_masuk'] ?></td>
+              <td style="vertical-align:middle;"><?php echo $row['pendidikan'] ?></td>
               <td style="vertical-align:middle;"><?php echo $row['hasil_akhir'] ?></td>
               <td class="text-center" style="vertical-align:middle;">
             		<a href="data-alternatif-ubah.php?id=<?php echo $row['id_alternatif'] ?>" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
