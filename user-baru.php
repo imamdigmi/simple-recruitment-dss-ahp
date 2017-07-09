@@ -54,9 +54,9 @@ if ($_POST) {
             <label for="rl">Role</label>
             <select class="form-control" name="rl" id="rl" required>
               <option value="">----</option>
-              <option value="atasan">Atasan</option>
-              <option value="pegawai">Pegawai</option>
-              <option value="manajer">Manajer</option>
+              <option value="operator">Operator</option>
+              <option value="wakil">Wakil Ketua</option>
+              <option value="ketua">Ketua</option>
             </select>
           </div>
           <div class="form-group">

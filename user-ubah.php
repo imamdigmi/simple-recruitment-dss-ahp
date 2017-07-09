@@ -45,9 +45,9 @@ if ($_POST) {
           <div class="form-group">
             <label for="rl">Role</label>
             <select class="form-control" name="rl" id="rl">
-              <option value="atasan"<?=($eks->rl == "atasan") ? "selected=\"on\"" : "" ?>>Atasan</option>
-              <option value="pegawai"<?=($eks->rl == "pegawai") ? "selected=\"on\"" : "" ?>>Pegawai</option>
-              <option value="manajer"<?=($eks->rl == "manajer") ? "selected=\"on\"" : "" ?>>Manajer</option>
+              <option value="operator"<?=($eks->rl == "operator") ? "selected=\"on\"" : "" ?>>Operator</option>
+              <option value="wakil"<?=($eks->rl == "wakil") ? "selected=\"on\"" : "" ?>>Wakil Ketua</option>
+              <option value="ketua"<?=($eks->rl == "ketua") ? "selected=\"on\"" : "" ?>>Ketua</option>
             </select>
           </div>
           <div class="form-group">
@@ -56,7 +56,8 @@ if ($_POST) {
           </div>
           <div class="form-group">
             <label for="pw">Password</label>
-            <input type="text" class="form-control" id="pw" name="pw" value="<?php echo $eks->pw; ?>">
+            <input type="text" class="form-control" id="pw" name="pw">
+            <span class="help-block text-red">*) Isi jika ingin diubah</span>
           </div>
           <div class="btn-group">
             <button type="submit" class="btn btn-dark">Ubah</button>
