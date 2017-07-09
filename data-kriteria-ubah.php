@@ -36,7 +36,7 @@ if($_POST){
 		</p>
 		<div class="panel panel-default">
 			<div class="panel-body">
-			<form method="post">
+			<form method="post" id="form">
 				<div class="form-group">
 					<label for="kt">Nama Kriteria</label>
 					<input type="text" class="form-control" id="nm" name="nm" value="<?php echo $eks->nm; ?>">

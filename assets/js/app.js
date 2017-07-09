@@ -1,6 +1,26 @@
 $(document).ready(function() {
-  $('#tabeldata').DataTable();
+  $('#nav').affix({
+    offset: { top: 50 }
+  });
+
+  $('#sidebar').affix({
+    offset: { top: 17 }
+  });
+
   $(".datepicker").datepicker({ format: "yyyy-mm-dd" });
+
+  $("#calon_anggota").DataTable();
+
+  $("#calon_anggota")
+    .removeClass( 'display' );
+
+  $('#form').parsley().on('field:validated', function() {
+    var ok = $('.parsley-error').length === 0;
+    $('.bs-callout-info').toggleClass('hidden', !ok);
+    $('.bs-callout-warning').toggleClass('hidden', ok);
+  });
+  
+  $('#tabeldata').DataTable();
 });
 
 function showSuccessToast() {

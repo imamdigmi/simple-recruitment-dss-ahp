@@ -1,19 +1,21 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800|Roboto+Slab:400,100,300,700);
+
 * {
   -webkit-border-radius: 0 !important;
      -moz-border-radius: 0 !important;
           border-radius: 0 !important;
 }
 
-body {
-    margin-top: 70px;
+#login-box {
+  position: absolute;
+  top: 50%;
+  margin-top: -200px;/* half of #content height*/
+  left: 0;
+  width: 100%;
 }
 
 .text-red {
     color: #e74c3c;
-}
-
-.text-bold {
-  font-weight: bolder;
 }
 
 /*=== Panel ===*/
@@ -152,4 +154,39 @@ body {
     color: #ecf0f1;
     background-color: #34495e;
   }
+}
+
+.navbar-brand {
+	font-family: "Roboto Slab", Open Sans;
+}
+
+.head {
+	height: 120px;
+	background-color: #34495e;
+}
+
+.left-logo {
+	width: 320px;
+	height: 71px;
+	margin-top: 22px;
+	text-indent: 120%;
+	white-space: nowrap;
+	overflow: hidden;
+	background: url('../img/logo.png') no-repeat;
+	background-size: 100%;
+}
+
+#nav.affix {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index:10;
+}
+#sidebar.affix-top {
+    position: static;
+}
+
+#sidebar.affix {
+    position: fixed;
+    top: 80px;
 }

@@ -33,7 +33,7 @@ if($_POST){
   	</p>
   	<div class="panel panel-default">
 			<div class="panel-body">
-		    <form method="post">
+		    <form method="post" id="form">
 				  <div class="form-group">
 				    <label for="jm">Jumlah Nilai</label>
 				    <input type="text" class="form-control" id="jm" name="jm" value="<?php echo $eks->jm; ?>">

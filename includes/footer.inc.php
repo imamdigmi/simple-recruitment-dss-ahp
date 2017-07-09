@@ -6,6 +6,7 @@
     <script type="text/javascript" src="assets/js/dataTables.bootstrap.min.js"></script>
     <script type="text/javascript" src="assets/js/bootstrap-datepicker.min.js"></script>
     <script type="text/javascript" src="assets/js/jquery.toastmessage.js"></script>
+    <script type="text/javascript" src="assets/js/parsley.min.js"></script>
 		<script type="text/javascript" src="assets/js/app.js"></script>
   </body>
 </html>

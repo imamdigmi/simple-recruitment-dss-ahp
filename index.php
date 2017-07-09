@@ -74,7 +74,7 @@ $stmt5 = $pro5->readAll();
 	</div>
 
 	<hr>
-	<footer class="text-center">Copyright &copy; 2017 PT. Global Eushanosoft</footer>
+	<footer class="text-center">Copyright &copy; 2017 UKM Kesenian STMIK Akakom Yogyakarta</footer>
 
 	</div>
 
@@ -85,13 +85,21 @@ $stmt5 = $pro5->readAll();
 	<script>
 		var chart1; // globally available
 		$(document).ready(function() {
+		  $('#nav').affix({
+		    offset: { top: 50 }
+		  });
+
+		  $('#sidebar').affix({
+		    offset: { top: 17 }
+		  });
+
 			chart1 = new Highcharts.Chart({
 			chart: {
 				renderTo: 'container2',
 				type: 'column'
 			},
 			title: {
-				text: 'Grafik Perangkingan '
+				text: 'Grafik Perankingan '
 			},
 			xAxis: {
 				categories: ['Alternatif']

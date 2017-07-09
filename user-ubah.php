@@ -37,7 +37,7 @@ if ($_POST) {
     </p>
     <div class="panel panel-default">
       <div class="panel-body">
-        <form method="post">
+        <form method="post" id="form">
           <div class="form-group">
             <label for="nl">Nama Lengkap</label>
             <input type="text" class="form-control" id="nl" name="nl" value="<?php echo $eks->nl; ?>">

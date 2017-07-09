@@ -43,7 +43,7 @@ if ($_POST) {
     </p>
       <div class="panel panel-default">
         <div class="panel-body">
-          <form method="POST">
+          <form method="POST" id="form">
             <div class="form-group">
                 <label for="id">ID Alternatif</label>
                 <input type="text" name="id" id="id" class="form-control" autofocus="on" readonly="on" value="<?php echo $altObj->id; ?>">

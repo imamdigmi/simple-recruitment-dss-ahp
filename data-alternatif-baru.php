@@ -43,7 +43,7 @@ if($_POST){
   	</p>
   	<div class="panel panel-default">
 			<div class="panel-body">
-				    <form method="post">
+				    <form method="post" id="form">
 						  <div class="form-group">
 						    <label for="id_alternatif">ID Alternatif</label>
 						    <input type="text" class="form-control" id="id_alternatif" name="id_alternatif" required readonly="on" value="<?php echo $altObj->getNewID(); ?>">
