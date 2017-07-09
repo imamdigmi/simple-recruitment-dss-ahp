@@ -82,7 +82,9 @@ $db = $config->getConnection();
                     <a href="#" class="dropdown-toggle text-red text-bold" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?=$_SESSION["nama_lengkap"]?> <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="profil.php">Profil</a></li>
-                        <li><a href="user.php">Manejer Pengguna</a></li>
+                        <?php if ($_SESSION["role"] == "operator"): ?>
+                            <li><a href="user.php">Manejer Pengguna</a></li>
+                        <?php endif; ?>
                         <li role="separator" class="divider"></li>
                         <li><a href="logout.php">Logout</a></li>
                     </ul>
@@ -92,5 +94,5 @@ $db = $config->getConnection();
         </div><!-- /.container -->
     </nav>
   </div>
-  
+
   <div class="container">
