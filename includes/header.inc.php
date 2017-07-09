@@ -62,7 +62,7 @@ $db = $config->getConnection();
 
                 <?php if ($_SESSION["role"] == "wakil" OR $_SESSION["role"] == "ketua"): ?>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Analisan <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Analisa <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li role="presentation"><a href="analisa-kriteria.php">Kriteria</a></li>
                             <li role="presentation"><a href="analisa-alternatif.php">Alternatif</a></li>
