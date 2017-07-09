@@ -1,5 +1,5 @@
 <?php
-include_once 'includes/config.php';
+include_once('includes/config.php');
 
 $config = new Config();
 $db = $config->getConnection();
@@ -21,7 +21,7 @@ if ($_POST) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Pemilihan Pegawai Terbaik</title>
+    <title>Rekrutmen Anggota Baru</title>
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/sweetalert.css">
     <link rel="stylesheet" href="assets/css/style.css">
@@ -47,7 +47,7 @@ if ($_POST) {
                         <div class="panel-footer">
                             <button type="submit" class="btn btn-dark raised btn-block">Login</button>
                             <br>
-                            <p class="text-center">PT. Global Eushanosoft</p>
+                            <p class="text-center">UKM Kesenian STMIK Akakom Yogyakarta</p>
                         </div>
                     </div>
                 </form>
@@ -59,14 +59,14 @@ if ($_POST) {
     <script src="assets/js/sweetalert.min.js"></script>
 	<?php if (isset($msg)): ?>
     <script type="text/javascript">
-		swal({
-            title: "Maaf!",
-            text: "<?=$msg?>",
-            type: "error",
-            timer: 2000,
-            confirmButtonColor: "#DD6B55"
-		})
-	</script>
+  		swal({
+              title: "Maaf!",
+              text: "<?=$msg?>",
+              type: "error",
+              timer: 2000,
+              confirmButtonColor: "#DD6B55"
+  		})
+  	</script>
 	<?php endif; ?>
 </body>
 </html>

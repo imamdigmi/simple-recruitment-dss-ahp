@@ -1,5 +1,5 @@
 	<hr>
-	<footer class="text-center">Copyright &copy; 2017 PT. Global Eushanosoft</footer>
+	<footer class="text-center">Copyright &copy; 2017 UKM Kesenian STMIK Akakom Yogyakarta</footer>
 	</div>
     <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="assets/js/jquery.dataTables.min.js"></script>

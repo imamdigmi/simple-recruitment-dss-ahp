@@ -45,16 +45,16 @@ $db = $config->getConnection();
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
               <li><a href="index.php">Home <span class="sr-only">(current)</span></a></li>
-              <?php if ($_SESSION["role"] == "pegawai"): ?>
-                  <li role="presentation"><a href="data-alternatif.php">Pegawai</a></li>
+              <?php if ($_SESSION["role"] == "operator"): ?>
+                  <li role="presentation"><a href="data-alternatif.php">Calon Anggota</a></li>
               <?php endif; ?>
 
-              <?php if ($_SESSION["role"] == "atasan"): ?>
+              <?php if ($_SESSION["role"] == "wakil"): ?>
                   <li role="presentation"><a href="data-kriteria.php">Kriteria</a></li>
                   <li role="presentation"><a href="nilai.php">Nilai</a></li>
               <?php endif; ?>
 
-              <?php if ($_SESSION["role"] == "atasan" OR $_SESSION["role"] == "manajer"): ?>
+              <?php if ($_SESSION["role"] == "wakil" OR $_SESSION["role"] == "ketua"): ?>
                   <li class="dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Analisan <span class="caret"></span></a>
                       <ul class="dropdown-menu">
