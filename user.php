@@ -76,7 +76,11 @@ if (isset($_POST['hapus-contengan'])) {
         <tbody>
           <?php while ($row = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
             <tr>
-              <td style="vertical-align:middle;"><input type="checkbox" value="<?php echo $row['id_pengguna'] ?>" name="checkbox[]" /></td>
+              <?php if ($row["role"] == "operator"): ?>
+                <td style="vertical-align:middle;"><input type="checkbox" disabled="on" /></td>
+              <?php else: ?>
+                <td style="vertical-align:middle;"><input type="checkbox" value="<?php echo $row['id_pengguna'] ?>" name="checkbox[]" /></td>
+              <?php endif; ?>
         	    <td style="vertical-align:middle;"><?php echo $row['nama_lengkap'] ?></td>
         	    <td style="vertical-align:middle;"><?php echo $row['role'] ?></td>
         	    <td style="vertical-align:middle;"><?php echo $row['username'] ?></td>
