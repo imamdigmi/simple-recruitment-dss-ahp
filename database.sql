@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 08, 2017 at 02:07 PM
+-- Generation Time: Jul 09, 2017 at 04:54 AM
 -- Server version: 10.1.23-MariaDB
 -- PHP Version: 7.1.5
 
@@ -19,10 +19,10 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `employees`
+-- Database: `recruitment`
 --
-CREATE DATABASE IF NOT EXISTS `employees` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `employees`;
+CREATE DATABASE IF NOT EXISTS `recruitment` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `recruitment`;
 
 -- --------------------------------------------------------
 
@@ -358,7 +358,7 @@ INSERT INTO `nilai` (`id_nilai`, `jum_nilai`, `ket_nilai`) VALUES
 CREATE TABLE `pengguna` (
   `id_pengguna` int(11) NOT NULL,
   `nama_lengkap` varchar(255) NOT NULL,
-  `role` enum('atasan','pegawai','manajer') NOT NULL,
+  `role` enum('operator','wakil','ketua') NOT NULL,
   `username` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -368,9 +368,9 @@ CREATE TABLE `pengguna` (
 --
 
 INSERT INTO `pengguna` (`id_pengguna`, `nama_lengkap`, `role`, `username`, `password`) VALUES
-(1, 'Imam Digmi', 'pegawai', 'pegawai', '047aeeb234644b9e2d4138ed3bc7976a'),
-(2, 'Sriwani', 'atasan', 'atasan', '221ef2597affd3f083ac94af9e1b1e7f'),
-(3, 'Dede', 'manajer', 'dede', 'b4be1c568a6dc02dcaf2849852bdb13e');
+(1, 'Imam Digmi', 'operator', 'operator', '4b583376b2767b923c3e1da60d10de59'),
+(2, 'Sriwani', 'wakil', 'wakil', '28d866e5f30ae6386be9f1921e0b2a58'),
+(3, 'Dede', 'ketua', 'ketua', '00719910bb805741e4b7f28527ecb3ad');
 
 -- --------------------------------------------------------
 
