@@ -29,7 +29,3 @@ $ git commit -m "pesan perubahan"
 $ git push origin maser
 $ git pull origin master
 ```
-
-## Todo
-[] Validasi input data
-[] Pencarian data
