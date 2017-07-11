@@ -4,15 +4,13 @@ class Alternatif {
 	private $table_name = "data_alternatif";
 
 	public $id;
-	public $nik;
+	public $nim;
 	public $nama;
 	public $tempat_lahir;
 	public $tanggal_lahir;
 	public $kelamin;
 	public $alamat;
-	public $jabatan;
-	public $tanggal_masuk;
-	public $pendidikan;
+	public $no_hp;
 	public $hasil_akhir;
 	public $skor_alternatif;
 
@@ -21,18 +19,16 @@ class Alternatif {
 	}
 
 	function insert() {
-		$query = "INSERT INTO {$this->table_name} VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NULL)";
+		$query = "INSERT INTO {$this->table_name} VALUES(?, ?, ?, ?, ?, ?, ?, ?, NULL)";
 		$stmt = $this->conn->prepare($query);
 		$stmt->bindParam(1, $this->id);
-		$stmt->bindParam(2, $this->nik);
+		$stmt->bindParam(2, $this->nim);
 		$stmt->bindParam(3, $this->nama);
 		$stmt->bindParam(4, $this->tempat_lahir);
 		$stmt->bindParam(5, $this->tanggal_lahir);
 		$stmt->bindParam(6, $this->kelamin);
 		$stmt->bindParam(7, $this->alamat);
-		$stmt->bindParam(8, $this->jabatan);
-		$stmt->bindParam(9, $this->tanggal_masuk);
-		$stmt->bindParam(10, $this->pendidikan);
+		$stmt->bindParam(8, $this->no_hp);
 
 		if ($stmt->execute()) {
 			return true;
@@ -65,16 +61,13 @@ class Alternatif {
 		$row = $stmt->fetch(PDO::FETCH_ASSOC);
 
 		$this->id = $row["id_alternatif"];
-		$this->nik = $row["nik"];
+		$this->nim = $row["nim"];
 		$this->nama = $row["nama"];
 		$this->tempat_lahir = $row["tempat_lahir"];
 		$this->tanggal_lahir = $row["tanggal_lahir"];
 		$this->kelamin = $row["kelamin"];
 		$this->alamat = $row["alamat"];
-		$this->jabatan = $row["jabatan"];
-		$this->tanggal_masuk = $row["tanggal_masuk"];
-		$this->pendidikan = $row["pendidikan"];
-		$this->hasil_akhir = $row["hasil_akhir"];
+		$this->no_hp = $row["no_hp"];
 		// $this->skor_alternatif = $row['skor_alternatif'];
 	}
 
@@ -92,28 +85,24 @@ class Alternatif {
 	function update() {
 		$query = "UPDATE {$this->table_name}
 				SET
-					nik = :nik,
+					nim = :nim,
 					nama = :nama,
 					tempat_lahir = :tempat_lahir,
 					tanggal_lahir = :tanggal_lahir,
 					kelamin = :kelamin,
 					alamat = :alamat,
-					jabatan = :jabatan,
-					tanggal_masuk = :tanggal_masuk,
-					pendidikan = :pendidikan
+					no_hp = :no_hp
 				WHERE
 					id_alternatif = :id";
 		$stmt = $this->conn->prepare($query);
 
-		$stmt->bindParam(':nik', $this->nik);
+		$stmt->bindParam(':nim', $this->nim);
 		$stmt->bindParam(':nama', $this->nama);
 		$stmt->bindParam(':tempat_lahir', $this->tempat_lahir);
 		$stmt->bindParam(':tanggal_lahir', $this->tanggal_lahir);
 		$stmt->bindParam(':kelamin', $this->kelamin);
 		$stmt->bindParam(':alamat', $this->alamat);
-		$stmt->bindParam(':jabatan', $this->jabatan);
-		$stmt->bindParam(':tanggal_masuk', $this->tanggal_masuk);
-		$stmt->bindParam(':pendidikan', $this->pendidikan);
+		$stmt->bindParam(':no_hp', $this->no_hp);
 		$stmt->bindParam(':id', $this->id);
 
 		// execute the query

@@ -5,16 +5,14 @@ include_once('includes/alternatif.inc.php');
 $altObj = new Alternatif($db);
 
 if($_POST){
-	$altObj->$id = $_POST["id_alternatif"];
-	$altObj->$nik = $_POST["nik"];
-	$altObj->$nama = $_POST["nama"];
-	$altObj->$tempat_lahir = $_POST["tempat_lahir"];
-	$altObj->$tanggal_lahir = $_POST["tanggal_lahir"];
-	$altObj->$kelamin = $_POST["kelamin"];
-	$altObj->$alamat = $_POST["alamat"];
-	$altObj->$jabatan = $_POST["jabatan"];
-	$altObj->$tanggal_masuk = $_POST["tanggal_masuk"];
-	$altObj->$pendidikan = $_POST["pendidikan"];
+	$altObj->id = $_POST["id_alternatif"];
+	$altObj->nim = $_POST["nim"];
+	$altObj->nama = $_POST["nama"];
+	$altObj->tempat_lahir = $_POST["tempat_lahir"];
+	$altObj->tanggal_lahir = $_POST["tanggal_lahir"];
+	$altObj->kelamin = $_POST["kelamin"];
+	$altObj->alamat = $_POST["alamat"];
+	$altObj->no_hp = $_POST["no_hp"];
 
 	if($altObj->insert()){ ?>
 		<script type="text/javascript">
@@ -49,8 +47,8 @@ if($_POST){
 						    <input type="text" class="form-control" id="id_alternatif" name="id_alternatif" required readonly="on" value="<?php echo $altObj->getNewID(); ?>">
 						  </div>
 							<div class="form-group">
-									<label for="nik">Nomor Induk Karyawan</label>
-									<input type="text" name="nik" id="nik" class="form-control" autofocus="on" required="on">
+									<label for="nim">Nomor Induk Mahasiswa</label>
+									<input type="text" name="nim" id="nim" class="form-control" autofocus="on" required="on">
 							</div>
 							<div class="form-group">
 									<label for="nama">Nama Lengkap</label>
@@ -77,16 +75,8 @@ if($_POST){
 									<input type="text" name="alamat" id="alamat" class="form-control" required="on">
 							</div>
 							<div class="form-group">
-									<label for="jabatan">Jabatan</label>
-									<input type="text" name="jabatan" id="jabatan" class="form-control" required="on">
-							</div>
-							<div class="form-group">
-									<label for="tanggal_masuk">Tanggal Masuk</label>
-									<input type="text" name="tanggal_masuk" id="tanggal_masuk" class="form-control datepicker" required="on">
-							</div>
-							<div class="form-group">
-									<label for="pendidikan">Pendidikan</label>
-									<input type="text" name="pendidikan" id="pendidikan" class="form-control" required="on">
+									<label for="no_hp">Nomor HP</label>
+									<input type="text" name="no_hp" id="no_hp" class="form-control" required="on">
 							</div>
 							<div class="btn-group">
 							  <button type="submit" class="btn btn-dark">Simpan</button>
