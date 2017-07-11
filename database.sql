@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 11, 2017 at 06:12 AM
+-- Generation Time: Jul 11, 2017 at 03:55 PM
 -- Server version: 10.1.23-MariaDB
 -- PHP Version: 7.1.5
 
@@ -241,7 +241,7 @@ INSERT INTO `data_alternatif` (`id_alternatif`, `nim`, `nama`, `tempat_lahir`, `
 ('A2', '135610102', 'Syarif', 'Padang', '1900-12-07', 'pria', 'Padang', '098765432123', 0.1787407990391654),
 ('A3', '135610103', 'Said', 'Blitang', '1901-01-27', 'pria', 'Blitang', '081235678765', 0.15810625424562932),
 ('A4', '135610104', 'Tyo', 'Kalimantan Barat', '1900-12-29', 'pria', 'Kalimantan Barat', '087676545435', 0.1878573922066305),
-('A5', '135610105', 'Warham', 'Sulawesi', '2017-07-31', 'pria', 'Sulawesi', '081224898765', NULL);
+('A5', '135610105', 'Warham', 'Sulawesi', '2017-07-31', 'pria', 'Sulawesi', '081224898765', 0.14013021407978402);
 
 -- --------------------------------------------------------
 
@@ -350,6 +350,51 @@ INSERT INTO `nilai` (`id_nilai`, `jum_nilai`, `ket_nilai`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `nilai_awal`
+--
+
+CREATE TABLE `nilai_awal` (
+  `id_nilai_awal` int(11) NOT NULL,
+  `nim` char(9) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nilai` varchar(5) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `keterangan` enum('B','C','K') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `periode` char(4) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `nilai_awal`
+--
+
+INSERT INTO `nilai_awal` (`id_nilai_awal`, `nim`, `nilai`, `keterangan`, `periode`) VALUES
+(1, '135610101', '82.6', 'B', '2005');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `nilai_awal_detail`
+--
+
+CREATE TABLE `nilai_awal_detail` (
+  `id_nilai_awal_detail` int(11) NOT NULL,
+  `id_nilai` int(11) NOT NULL,
+  `id_kriteria` varchar(2) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nilai` int(2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `nilai_awal_detail`
+--
+
+INSERT INTO `nilai_awal_detail` (`id_nilai_awal_detail`, `id_nilai`, `id_kriteria`, `nilai`) VALUES
+(1, 1, 'C1', 80),
+(2, 1, 'C2', 90),
+(3, 1, 'C3', 80),
+(4, 1, 'C4', 85),
+(5, 1, 'C5', 78);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `pengguna`
 --
 
@@ -366,7 +411,9 @@ CREATE TABLE `pengguna` (
 --
 
 INSERT INTO `pengguna` (`id_pengguna`, `nama_lengkap`, `role`, `username`, `password`) VALUES
-(1, 'Imam Digmi', 'operator', 'operator', '4b583376b2767b923c3e1da60d10de59');
+(1, 'Imam Digmi', 'operator', 'operator', '4b583376b2767b923c3e1da60d10de59'),
+(2, 'Wakil Ketua', 'wakil', 'wakil', '28d866e5f30ae6386be9f1921e0b2a58'),
+(3, 'Kamu', 'operator', 'kamu', '48ec8af8df4bf4347d9b1de4ee7bb092');
 
 -- --------------------------------------------------------
 
@@ -421,6 +468,22 @@ ALTER TABLE `nilai`
   ADD PRIMARY KEY (`id_nilai`);
 
 --
+-- Indexes for table `nilai_awal`
+--
+ALTER TABLE `nilai_awal`
+  ADD PRIMARY KEY (`id_nilai_awal`),
+  ADD KEY `nik` (`nim`);
+
+--
+-- Indexes for table `nilai_awal_detail`
+--
+ALTER TABLE `nilai_awal_detail`
+  ADD PRIMARY KEY (`id_nilai_awal_detail`),
+  ADD KEY `id_kriteria` (`id_kriteria`),
+  ADD KEY `id_kriteria_2` (`id_kriteria`),
+  ADD KEY `id_nilai` (`id_nilai`);
+
+--
 -- Indexes for table `pengguna`
 --
 ALTER TABLE `pengguna`
@@ -442,10 +505,20 @@ ALTER TABLE `ranking`
 ALTER TABLE `nilai`
   MODIFY `id_nilai` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 --
+-- AUTO_INCREMENT for table `nilai_awal`
+--
+ALTER TABLE `nilai_awal`
+  MODIFY `id_nilai_awal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `nilai_awal_detail`
+--
+ALTER TABLE `nilai_awal_detail`
+  MODIFY `id_nilai_awal_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
 -- AUTO_INCREMENT for table `pengguna`
 --
 ALTER TABLE `pengguna`
-  MODIFY `id_pengguna` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;COMMIT;
+  MODIFY `id_pengguna` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
