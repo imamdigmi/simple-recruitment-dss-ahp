@@ -18,18 +18,33 @@ if ($_POST) {
     $nilObj->keterangan = $nilObj->getRange($nilai);
     $nilObj->periode = $_POST['periode'];
 
-    if ($nilObj->insert()) { ?>
-				<script type="text/javascript">
+    if ($nilObj->insert()) {
+      $id = $db->lastInsertId();
+      include_once('includes/nilai-awal-detail.inc.php');
+      $nilDObj = new NilaiAwalDetail($db);
+			foreach ($_POST["kriteria"] as $k => $v) {
+        $nilDObj->id_nilai = $id;
+        $nilDObj->id_kriteria = $k;
+        $nilDObj->nilai = $_POST["kriteria"][$k];
+				if (!$nilDObj->insert()) {
+          echo "<script type=\"text/javascript\">
+  						window.onload=function(){
+  							showStickyErrorToast();
+  						};
+  				</script>";
+				}
+			}
+			echo "<script type=\"text/javascript\">
 						window.onload=function(){
 							showStickySuccessToast();
 						};
-				</script> <?php
-    } else { ?>
-				<script type="text/javascript">
+				</script>";
+    } else {
+				echo "<script type=\"text/javascript\">
 						window.onload=function(){
 							showStickyErrorToast();
 						};
-				</script> <?php
+				</script>";
 		}
 }
 ?>
