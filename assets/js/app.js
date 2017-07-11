@@ -1,4 +1,6 @@
 $(document).ready(function() {
+  $('#tabeldata').DataTable();
+
   $('#nav').affix({
     offset: { top: 50 }
   });
@@ -9,8 +11,6 @@ $(document).ready(function() {
 
   $(".datepicker").datepicker({ format: "yyyy-mm-dd" });
 
-  $("#calon_anggota").DataTable();
-
   $("#calon_anggota")
     .removeClass( 'display' );
 
@@ -19,8 +19,6 @@ $(document).ready(function() {
     $('.bs-callout-info').toggleClass('hidden', !ok);
     $('.bs-callout-warning').toggleClass('hidden', ok);
   });
-  
-  $('#tabeldata').DataTable();
 });
 
 function showSuccessToast() {
