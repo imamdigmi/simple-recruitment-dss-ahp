@@ -52,7 +52,7 @@ if ($_POST) {
 	  <div class="col-xs-12 col-sm-12 col-md-12">
 			  <ol class="breadcrumb">
 					  <li><a href="index.php">Beranda</a></li>
-					  <li><a href="nilai-awal.php">Nilai</a></li>
+					  <li><a href="nilai-awal.php">Nilai Awal</a></li>
 					  <li class="active">Tambah Data</li>
 				</ol>
 		  	<p style="margin-bottom:10px;">
