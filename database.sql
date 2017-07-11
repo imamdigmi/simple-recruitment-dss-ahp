@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 09, 2017 at 04:54 AM
+-- Generation Time: Jul 11, 2017 at 06:12 AM
 -- Server version: 10.1.23-MariaDB
 -- PHP Version: 7.1.5
 
@@ -222,28 +222,26 @@ INSERT INTO `analisa_kriteria` (`kriteria_pertama`, `nilai_analisa_kriteria`, `h
 
 CREATE TABLE `data_alternatif` (
   `id_alternatif` varchar(2) NOT NULL,
-  `nik` char(18) NOT NULL,
+  `nim` char(9) NOT NULL,
   `nama` varchar(45) NOT NULL,
   `tempat_lahir` varchar(100) NOT NULL,
   `tanggal_lahir` date NOT NULL,
   `kelamin` enum('pria','wanita') NOT NULL,
   `alamat` varchar(255) NOT NULL,
-  `jabatan` varchar(50) NOT NULL,
-  `tanggal_masuk` date NOT NULL,
-  `pendidikan` varchar(50) NOT NULL,
-  `hasil_akhir` double NOT NULL
+  `no_hp` varchar(12) NOT NULL,
+  `hasil_akhir` double DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `data_alternatif`
 --
 
-INSERT INTO `data_alternatif` (`id_alternatif`, `nik`, `nama`, `tempat_lahir`, `tanggal_lahir`, `kelamin`, `alamat`, `jabatan`, `tanggal_masuk`, `pendidikan`, `hasil_akhir`) VALUES
-('A1', '2147126186', 'Rizky', 'Indramayu', '1900-12-20', 'wanita', 'Losarang', 'Staff', '2017-07-08', 'Statistika', 0.3351653404287869),
-('A2', '230932094823', 'Syarif', 'Padang', '1900-12-07', 'pria', 'Padang', 'Pegawai', '1900-12-28', 'Sistem Informasi', 0.1787407990391654),
-('A3', '01749874934', 'Said', 'Blitang', '1901-01-27', 'pria', 'Blitang', 'Kurir', '1900-12-27', 'Sistem Informasi', 0.15810625424562932),
-('A4', '4587349857', 'Tyo', 'Kalimantan Barat', '1900-12-29', 'pria', 'Kalimantan Barat', 'Wakil Ketua', '1900-12-16', 'Sistem Informasi', 0.1878573922066305),
-('A5', '6096214124', 'Warham', 'Sulawesi', '1900-12-20', 'pria', 'Sulawesi', 'Satpam', '1900-12-29', 'Sistem Informasi', 0.14013021407978402);
+INSERT INTO `data_alternatif` (`id_alternatif`, `nim`, `nama`, `tempat_lahir`, `tanggal_lahir`, `kelamin`, `alamat`, `no_hp`, `hasil_akhir`) VALUES
+('A1', '135610101', 'Rizky', 'Indramayu', '1900-12-20', 'wanita', 'Losarang', '089123456789', 0.3351653404287869),
+('A2', '135610102', 'Syarif', 'Padang', '1900-12-07', 'pria', 'Padang', '098765432123', 0.1787407990391654),
+('A3', '135610103', 'Said', 'Blitang', '1901-01-27', 'pria', 'Blitang', '081235678765', 0.15810625424562932),
+('A4', '135610104', 'Tyo', 'Kalimantan Barat', '1900-12-29', 'pria', 'Kalimantan Barat', '087676545435', 0.1878573922066305),
+('A5', '135610105', 'Warham', 'Sulawesi', '2017-07-31', 'pria', 'Sulawesi', '081224898765', NULL);
 
 -- --------------------------------------------------------
 
@@ -368,9 +366,7 @@ CREATE TABLE `pengguna` (
 --
 
 INSERT INTO `pengguna` (`id_pengguna`, `nama_lengkap`, `role`, `username`, `password`) VALUES
-(1, 'Imam Digmi', 'operator', 'operator', '4b583376b2767b923c3e1da60d10de59'),
-(2, 'Sriwani', 'wakil', 'wakil', '28d866e5f30ae6386be9f1921e0b2a58'),
-(3, 'Dede', 'ketua', 'ketua', '00719910bb805741e4b7f28527ecb3ad');
+(1, 'Imam Digmi', 'operator', 'operator', '4b583376b2767b923c3e1da60d10de59');
 
 -- --------------------------------------------------------
 
@@ -449,7 +445,7 @@ ALTER TABLE `nilai`
 -- AUTO_INCREMENT for table `pengguna`
 --
 ALTER TABLE `pengguna`
-  MODIFY `id_pengguna` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;COMMIT;
+  MODIFY `id_pengguna` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
