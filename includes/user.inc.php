@@ -4,21 +4,22 @@ class User {
 	private $table_name = "pengguna";
 
 	public $id;
-	public $nl;
-	public $un;
-	public $pw;
+	public $name;
+	public $role;
+	public $username;
+	public $password;
 
 	public function __construct($db) {
 		$this->conn = $db;
 	}
 
 	function insert() {
-		$query = "INSERT INTO ".$this->table_name." VALUES(NULL, ?, ?, ?, ?)";
+		$query = "INSERT INTO {$this->table_name} VALUES(NULL, ?, ?, ?, ?)";
 		$stmt = $this->conn->prepare($query);
-		$stmt->bindParam(1, $this->nl);
-		$stmt->bindParam(2, $this->rl);
-		$stmt->bindParam(3, $this->un);
-		$stmt->bindParam(4, $this->pw);
+		$stmt->bindParam(1, $this->name);
+		$stmt->bindParam(2, $this->role);
+		$stmt->bindParam(3, $this->username);
+		$stmt->bindParam(4, $this->password);
 
 		if ($stmt->execute()) {
 			return true;
@@ -28,7 +29,7 @@ class User {
 	}
 
 	function readAll(){
-		$query = "SELECT * FROM ".$this->table_name." ORDER BY id_pengguna ASC";
+		$query = "SELECT * FROM {$this->table_name} ORDER BY id_pengguna ASC";
 		$stmt = $this->conn->prepare( $query );
 		$stmt->execute();
 		return $stmt;
@@ -36,35 +37,35 @@ class User {
 
 	// used when filling up the update product form
 	function readOne(){
-		$query = "SELECT * FROM ".$this->table_name." WHERE id_pengguna=? LIMIT 0,1";
+		$query = "SELECT * FROM {$this->table_name} WHERE id_pengguna=? LIMIT 0,1";
 		$stmt = $this->conn->prepare( $query );
 		$stmt->bindParam(1, $this->id);
 		$stmt->execute();
 		$row = $stmt->fetch(PDO::FETCH_ASSOC);
 		$this->id = $row['id_pengguna'];
-		$this->nl = $row['nama_lengkap'];
-		$this->rl = $row['role'];
-		$this->un = $row['username'];
-		$this->pw = $row['password'];
+		$this->name = $row['nama_lengkap'];
+		$this->role = $row['role'];
+		$this->username = $row['username'];
+		$this->password = $row['password'];
 	}
 
 	// update the product
 	function update() {
-		$query = "UPDATE ".$this->table_name ."
+		$query = "UPDATE {$this->table_name}
 				SET
-					nama_lengkap = :nm,
-					role = :rl,
-					username = :un,
-					password = :ps
+					nama_lengkap = :name,
+					role = :role,
+					username = :username,
+					password = :password
 				WHERE
 					id_pengguna = :id";
 
 		$stmt = $this->conn->prepare($query);
 
-		$stmt->bindParam(':nm', $this->nl);
-		$stmt->bindParam(':rl', $this->rl);
-		$stmt->bindParam(':un', $this->un);
-		$stmt->bindParam(':ps', $this->pw);
+		$stmt->bindParam(':name', $this->name);
+		$stmt->bindParam(':role', $this->role);
+		$stmt->bindParam(':username', $this->username);
+		$stmt->bindParam(':password', $this->password);
 		$stmt->bindParam(':id', $this->id);
 
 		// execute the query
@@ -77,7 +78,7 @@ class User {
 
 	// delete the product
 	function delete() {
-		$query = "DELETE FROM " . $this->table_name . " WHERE id_pengguna = ?";
+		$query = "DELETE FROM {$this->table_name} WHERE id_pengguna = ?";
 		$stmt = $this->conn->prepare($query);
 		$stmt->bindParam(1, $this->id);
 		if ($result = $stmt->execute()) {
@@ -88,14 +89,14 @@ class User {
 	}
 
 	function countAll(){
-		$query = "SELECT * FROM ".$this->table_name." ORDER BY id_pengguna ASC";
+		$query = "SELECT * FROM {$this->table_name} ORDER BY id_pengguna ASC";
 		$stmt = $this->conn->prepare( $query );
 		$stmt->execute();
 		return $stmt->rowCount();
 	}
 
 	function hapusell($ax) {
-		$query = "DELETE FROM ".$this->table_name." WHERE id_pengguna in $ax";
+		$query = "DELETE FROM {$this->table_name} WHERE id_pengguna in $ax";
 		$stmt = $this->conn->prepare($query);
 
 		if ($result = $stmt->execute()) {

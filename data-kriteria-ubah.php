@@ -39,7 +39,7 @@ if($_POST){
 			<form method="post" id="form">
 				<div class="form-group">
 					<label for="kt">Nama Kriteria</label>
-					<input type="text" class="form-control" id="nm" name="nm" value="<?php echo $eks->nm; ?>">
+					<input type="text" class="form-control" id="nm" name="nm" value="<?php echo $eks->nm; ?>" minlength="5" required="on">
 				</div>
 				<div class="btn-group">
 					<button type="submit" class="btn btn-dark">Ubah</button>

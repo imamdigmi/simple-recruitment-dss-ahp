@@ -9,10 +9,10 @@ $eks->id = $id;
 $eks->readOne();
 
 if ($_POST) {
-  $eks->nl = $_POST['nl'];
-  $eks->rl = $_POST['rl'];
-  $eks->un = $_POST['un'];
-  $eks->pw = md5($_POST['pw']);
+  $eks->name = $_POST['name'];
+  $eks->role = $_POST['role'];
+  $eks->username = $_POST['username'];
+  $eks->password = md5($_POST['password']);
   if ($eks->update()) {
     echo "<script>location.href='user.php'</script>";
   } else { ?>
@@ -39,24 +39,25 @@ if ($_POST) {
       <div class="panel-body">
         <form method="post" id="form">
           <div class="form-group">
-            <label for="nl">Nama Lengkap</label>
-            <input type="text" class="form-control" id="nl" name="nl" value="<?php echo $eks->nl; ?>">
+            <label for="name">Nama Lengkap</label>
+            <input type="text" class="form-control" id="name" name="name" value="<?php echo $eks->name; ?>" minlength="5" required="on">
           </div>
           <div class="form-group">
-            <label for="rl">Role</label>
-            <select class="form-control" name="rl" id="rl">
-              <option value="operator"<?=($eks->rl == "operator") ? "selected=\"on\"" : "" ?>>Operator</option>
-              <option value="wakil"<?=($eks->rl == "wakil") ? "selected=\"on\"" : "" ?>>Wakil Ketua</option>
-              <option value="ketua"<?=($eks->rl == "ketua") ? "selected=\"on\"" : "" ?>>Ketua</option>
+            <label for="role">Role</label>
+            <select class="form-control" name="role" id="role" required="on">
+              <option value="">----</option>
+              <option value="operator"<?=($eks->role == "operator") ? "selected=\"on\"" : "" ?>>Operator</option>
+              <option value="wakil"<?=($eks->role == "wakil") ? "selected=\"on\"" : "" ?>>Wakil Ketua</option>
+              <option value="ketua"<?=($eks->role == "ketua") ? "selected=\"on\"" : "" ?>>Ketua</option>
             </select>
           </div>
           <div class="form-group">
-            <label for="un">Username</label>
-            <input type="text" class="form-control" id="un" name="un" value="<?php echo $eks->un; ?>">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" id="username" name="username" value="<?php echo $eks->username; ?>" minlength="5" maxlength="10" data-parsley-type="alphanum" required="on">
           </div>
           <div class="form-group">
-            <label for="pw">Password</label>
-            <input type="text" class="form-control" id="pw" name="pw">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" name="password" minlength="6">
             <span class="help-block text-red">*) Isi jika ingin diubah</span>
           </div>
           <div class="btn-group">

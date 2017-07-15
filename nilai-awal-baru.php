@@ -60,10 +60,10 @@ if ($_POST) {
 		  	</p>
 	  	<div class="panel panel-default">
 					<div class="panel-body">
-						<form method="post">
+						<form method="post" id="form">
                 <div class="form-group">
                     <label for="nim">Mahasiswa</label>
-                    <select class="form-control" id="nim" name="nim">
+                    <select class="form-control" id="nim" name="nim" required="on">
                         <option value="">---</option>
                         <?php while ($row = $alt->fetch(PDO::FETCH_ASSOC)) : ?>
                             <option value="<?=$row["nim"]?>"><?=$row["nama"]?></option>
@@ -73,13 +73,13 @@ if ($_POST) {
                 <?php while ($row = $kri->fetch(PDO::FETCH_ASSOC)) : ?>
                   <div class="form-group">
                       <label for="<?=$row["nama_kriteria"]?>"><?=ucfirst($row["nama_kriteria"])?></label>
-                      <input type="text" name="kriteria[<?=$row["id_kriteria"]?>]" class="form-control">
+                      <input type="text" name="kriteria[<?=$row["id_kriteria"]?>]" class="form-control" data-parsley-type="integer" required="on">
                   </div>
                 <?php endwhile; ?>
                 <div class="form-group">
                     <label for="periode">Periode</label>
-                    <select class="form-control" name="periode">
-                        <option>---</option>
+                    <select class="form-control" name="periode" id="periode" required="on">
+                        <option value="">---</option>
                         <?php for ($i=2005; $i<=date("Y"); $i++): ?>
                           <option value="<?=$i?>"><?=$i?></option>
                         <?php endfor; ?>

@@ -38,7 +38,7 @@ if($_POST){
 				<form method="post" id="form">
 					<div class="form-group">
 						<label for="kd">ID Kriteria</label>
-						<select class="form-control" id="kd" name="kd">
+						<select class="form-control" id="kd" name="kd" required="on">
 							<option>C1</option>
 							<option>C2</option>
 							<option>C3</option>
@@ -48,7 +48,7 @@ if($_POST){
 					</div>
 					<div class="form-group">
 						<label for="nm">Nama Kriteria</label>
-						<input type="text" class="form-control" id="nm" name="nm" required>
+						<input type="text" class="form-control" id="nm" name="nm" minlength="5" required="on">
 					</div>
 					<div class="btn-group">
 						<button type="submit" class="btn btn-dark">Simpan</button>

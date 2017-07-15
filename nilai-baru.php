@@ -36,11 +36,11 @@ if ($_POST) {
 						<form method="post" id="form">
 								<div class="form-group">
 										<label for="jm">Jumlah Nilai</label>
-										<input type="text" class="form-control" id="jm" name="jm" required>
+										<input type="text" class="form-control" id="jm" name="jm" required="on">
 								</div>
 								<div class="form-group">
 										<label for="kt">Keterangan Nilai</label>
-										<input type="text" class="form-control" id="kt" name="kt" required>
+										<input type="text" class="form-control" id="kt" name="kt" minlength="6" required="on">
 								</div>
 								<div class="btn-group">
 										<button type="submit" class="btn btn-dark">Simpan</button>

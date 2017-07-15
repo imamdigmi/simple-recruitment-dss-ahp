@@ -48,15 +48,15 @@ if($_POST){
 						  </div>
 							<div class="form-group">
 									<label for="nim">Nomor Induk Mahasiswa</label>
-									<input type="text" name="nim" id="nim" class="form-control" autofocus="on" required="on">
+									<input type="text" name="nim" id="nim" class="form-control" autofocus="on" minlength="9" maxlength="9" data-parsley-type="integer" required="on">
 							</div>
 							<div class="form-group">
 									<label for="nama">Nama Lengkap</label>
-									<input type="text" name="nama" id="nama" class="form-control" required="on">
+									<input type="text" name="nama" id="nama" class="form-control" minlength="3" required="on">
 							</div>
 							<div class="form-group">
 									<label for="tempat_lahir">Tempat Lahir</label>
-									<input type="text" name="tempat_lahir" id="tempat_lahir" class="form-control" required="on">
+									<input type="text" name="tempat_lahir" id="tempat_lahir" class="form-control" minlength="5" required="on">
 							</div>
 							<div class="form-group">
 									<label for="tanggal_lahir">Tanggal Lahir</label>
@@ -72,11 +72,11 @@ if($_POST){
 							</div>
 							<div class="form-group">
 									<label for="alamat">Alamat</label>
-									<input type="text" name="alamat" id="alamat" class="form-control" required="on">
+									<textarea id="alamat" name="alamat" rows="4" class="form-control" minlength="10" required="on"></textarea>
 							</div>
 							<div class="form-group">
 									<label for="no_hp">Nomor HP</label>
-									<input type="text" name="no_hp" id="no_hp" class="form-control" required="on">
+									<input type="text" name="no_hp" id="no_hp" class="form-control" minlength="11" lengthmax="12" data-parsley-type="integer" required="on">
 							</div>
 							<div class="btn-group">
 							  <button type="submit" class="btn btn-dark">Simpan</button>

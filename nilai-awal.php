@@ -91,7 +91,7 @@ if (isset($_POST['hapus-contengan'])) {
                 ?></td>
               <td style="vertical-align:middle;"><?php echo $row['periode'] ?></td>
               <td class="text-center" style="vertical-align:middle;">
-                <a href="nilai-awal-ubah.php?id=<?php echo $row['id_nilai_awal'] ?>" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
+                <!-- <a href="nilai-awal-ubah.php?id=<?php //echo $row['id_nilai_awal'] ?>" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a> -->
                 <a href="nilai-awal-hapus.php?id=<?php echo $row['id_nilai_awal'] ?>" onclick="return confirm('Yakin ingin menghapus data')" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
               </td>
             </tr>
