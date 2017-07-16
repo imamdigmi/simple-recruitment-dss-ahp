@@ -75,9 +75,13 @@ class Alternatif {
 		$query = "SELECT id_alternatif FROM {$this->table_name} ORDER BY id_alternatif DESC LIMIT 1";
 		$stmt = $this->conn->prepare($query);
 		$stmt->execute();
-		$row = $stmt->fetch(PDO::FETCH_ASSOC);
-		$pcs = explode("A", $row['id_alternatif']);
-		$result = "A".($pcs[1]+1);
+		if ($stmt->rowCount()) {
+			$row = $stmt->fetch(PDO::FETCH_ASSOC);
+			$pcs = explode("A", $row['id_alternatif']);
+			$result = "A".($pcs[1]+1);
+		} else {
+			$result = "A1";
+		}
 		return $result;
 	}
 
