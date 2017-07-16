@@ -105,4 +105,12 @@ class User {
 			return false;
 		}
 	}
+
+	function getFirstOperator(){
+		$query = "SELECT id_pengguna FROM {$this->table_name} ORDER BY id_pengguna ASC LIMIT 1";
+		$stmt = $this->conn->prepare($query);
+		$stmt->execute();
+		$row = $stmt->fetch(PDO::FETCH_ASSOC);
+		$this->id = $row['id_pengguna'];
+	}
 }

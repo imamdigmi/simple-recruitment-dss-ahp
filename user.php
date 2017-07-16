@@ -4,7 +4,9 @@ include("includes/header.inc.php");
 include_once("includes/user.inc.php");
 $pro = new User($db);
 $stmt = $pro->readAll();
-$count = $pro->countAll();
+
+$user = new User($db);
+$user->getFirstOperator();
 
 if (isset($_POST['hapus-contengan'])) {
   $imp = "('".implode("','",array_values($_POST['checkbox']))."')";
@@ -86,10 +88,12 @@ if (isset($_POST['hapus-contengan'])) {
         	    <td style="vertical-align:middle;"><?php echo $row['username'] ?></td>
               <td class="text-center" style="vertical-align:middle;">
                 <div class="btn-group">
+                  <a href="user-ubah.php?id=<?php echo $row['id_pengguna'] ?>" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
                   <?php if ($row["role"] == "operator"): ?>
-              		  <a href="user-ubah.php?id=<?php echo $row['id_pengguna'] ?>" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
+                    <?php if ($user->id != $row["id_pengguna"]): ?>
+                      <a href="user-hapus.php?id=<?php echo $row['id_pengguna'] ?>" onclick="return confirm('Yakin ingin menghapus data')" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+                    <?php endif; ?>
                   <?php else: ?>
-                    <a href="user-ubah.php?id=<?php echo $row['id_pengguna'] ?>" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
                     <a href="user-hapus.php?id=<?php echo $row['id_pengguna'] ?>" onclick="return confirm('Yakin ingin menghapus data')" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
                   <?php endif; ?>
                 </div>
