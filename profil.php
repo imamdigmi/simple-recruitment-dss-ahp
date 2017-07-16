@@ -37,16 +37,17 @@ if($_POST){
   	</p>
     <form method="post">
       <div class="form-group">
-        <label for="nl">Nama Lengkap</label>
-        <input type="text" class="form-control" id="nl" name="nl" value="<?php echo $eks->nl; ?>" required>
+        <label for="name">Nama Lengkap</label>
+        <input type="text" class="form-control" id="name" name="name" value="<?php echo $eks->name; ?>" required>
       </div>
       <div class="form-group">
-        <label for="un">Username</label>
-        <input type="text" class="form-control" id="un" name="un" value="<?php echo $eks->un; ?>" required>
+        <label for="username">Username</label>
+        <input type="text" class="form-control" id="username" name="username" value="<?php echo $eks->username; ?>" required>
       </div>
       <div class="form-group">
-        <label for="pw">Password</label>
-        <input type="text" class="form-control" id="pw" name="pw" value="<?php echo $eks->pw; ?>" required>
+        <label for="password">Password</label>
+        <input type="password" class="form-control" id="password" name="password" value="<?php echo $eks->password; ?>" required>
+        <span class="help-block text-red">*) Ubah jika ingin di ganti</span>
       </div>
       <button type="submit" class="btn btn-primary"><span class="fa fa-edit"></span> Ubah</button>
     </form>
