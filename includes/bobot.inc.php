@@ -70,7 +70,7 @@ class Bobot {
 		$stmt = $this->conn->prepare( $query );
 		$stmt->execute();
 		$row = $stmt->fetch(PDO::FETCH_ASSOC);
-		$this->kp = $row['nilai_analisa_kriteria'];
+		$this->nak = $row['nilai_analisa_kriteria'];
 	}
 
 	function readAll2() {
@@ -78,6 +78,22 @@ class Bobot {
 		$stmt = $this->conn->prepare( $query );
 		$stmt->execute();
 		return $stmt;
+	}
+
+	function readAll3($x) {
+		$query = "SELECT * FROM {$this->table_name} WHERE kriteria_pertama='C1' AND kriteria_kedua = '$x' LIMIT 0,1";
+		$stmt = $this->conn->prepare( $query );
+		$stmt->execute();
+		$row = $stmt->fetch(PDO::FETCH_ASSOC);
+		$this->nak = $row['nilai_analisa_kriteria'];
+	}
+
+	function readAll4() {
+		$query = "SELECT * FROM data_kriteria ORDER BY id_kriteria DESC LIMIT 0,1 ";
+		$stmt = $this->conn->prepare( $query );
+		$stmt->execute();
+		$row = $stmt->fetch(PDO::FETCH_ASSOC);
+		return $row['id_kriteria'];
 	}
 
 	function countAll() {
