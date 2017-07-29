@@ -104,6 +104,14 @@ class Bobot {
 		return $stmt->rowCount();
 	}
 
+	function countAll1() {
+		$query = "SELECT * FROM {$this->table_name}";
+		$stmt = $this->conn->prepare($query);
+		$stmt->execute();
+
+		return $stmt->rowCount();
+	}
+
 	function readSum1($a) {
 		$query = "SELECT sum(nilai_analisa_kriteria) AS jumkr FROM {$this->table_name} WHERE kriteria_kedua='$a'";
 		$stmt = $this->conn->prepare( $query );
@@ -113,11 +121,11 @@ class Bobot {
 	}
 
 	function readSum2($a) {
-		$query = "SELECT sum(hasil_analisa_kriteria) AS jumkr2 FROM {$this->table_name} WHERE kriteria_kedua = '$a'";
+		$query = "SELECT sum(hasil_analisa_kriteria) AS jumlah FROM {$this->table_name} WHERE kriteria_pertama = '$a'";
 		$stmt = $this->conn->prepare( $query );
 		$stmt->execute();
 		$row = $stmt->fetch(PDO::FETCH_ASSOC);
-		$this->nak = $row['jumkr2'];
+		$this->hak = $row['jumlah'];
 	}
 
 	function readSum3() {
