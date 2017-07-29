@@ -13,8 +13,8 @@ class Bobot {
 		$this->conn = $db;
 	}
 
-	function insert($a,$b,$c) {
-		$query = "INSERT INTO".$this->table_name." VALUES('$a','$b','','$c')";
+	function insert($a, $b, $c) {
+		$query = "INSERT INTO {$this->table_name} VALUES('$a', '$b', 0, '$c')";
 		$stmt = $this->conn->prepare($query);
 
 		if ($stmt->execute()) {
@@ -24,7 +24,7 @@ class Bobot {
 		}
 	}
 
-	function insert2($a,$b,$c) {
+	function insert2($a, $b, $c) {
 		$query = "UPDATE {$this->table_name} SET hasil_analisa_kriteria='$a' WHERE kriteria_pertama='$b' AND kriteria_kedua='$c'";
 		$stmt = $this->conn->prepare($query);
 
@@ -38,6 +38,7 @@ class Bobot {
 	function insert3($a, $b) {
 		$query = "UPDATE data_kriteria SET jumlah_kriteria='$a' WHERE id_kriteria='$b'";
 		$stmt = $this->conn->prepare($query);
+
 		if ($stmt->execute()) {
 			return true;
 		} else {
@@ -119,11 +120,10 @@ class Bobot {
 		$this->hak = $row['avgkr'];
 	}
 
-	// update the product
-	function update($a,$b,$c) {
+	function update($a, $b, $c) {
 		$query = "UPDATE  {$this->table_name} SET nilai_analisa_kriteria = '$b' WHERE kriteria_pertama = '$a' and kriteria_kedua = '$c'";
 		$stmt = $this->conn->prepare($query);
-		// execute the query
+
 		if ($stmt->execute()) {
 			return true;
 		} else {
@@ -131,10 +131,10 @@ class Bobot {
 		}
 	}
 
-	// delete the product
 	function delete() {
-		$query = "DELETE FROM " . $this->table_name;
+		$query = "DELETE FROM {$this->table_name}";
 		$stmt = $this->conn->prepare($query);
+
 		if ($result = $stmt->execute()) {
 			return true;
 		} else {

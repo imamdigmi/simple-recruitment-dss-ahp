@@ -1,14 +1,15 @@
 <?php
 include_once('includes/header.inc.php');
+include_once('includes/kriteria.inc.php');
 
-if($_POST){
-	include_once('includes/kriteria.inc.php');
-	$eks = new Kriteria($db);
+$kriObj = new Kriteria($db);
 
-	$eks->id = $_POST['kd'];
-	$eks->nm = $_POST['nm'];
+if ($_POST) {
 
-	if($eks->insert()){ ?>
+	$kriObj->id = $_POST['id_kriteria'];
+	$kriObj->nama = $_POST['nama'];
+
+	if ($kriObj->insert()) { ?>
 		<script type="text/javascript">
 			window.onload=function(){
 				showStickySuccessToast();
@@ -37,18 +38,12 @@ if($_POST){
 			<div class="panel-body">
 				<form method="post" id="form">
 					<div class="form-group">
-						<label for="kd">ID Kriteria</label>
-						<select class="form-control" id="kd" name="kd" required="on">
-							<option>C1</option>
-							<option>C2</option>
-							<option>C3</option>
-							<option>C4</option>
-							<option>C5</option>
-						</select>
+						<label for="id_kriteria">ID Kriteria</label>
+					  <input type="text" class="form-control" id="id_kriteria" name="id_kriteria" required readonly="on" value="<?=$kriObj->getNewID()?>">
 					</div>
 					<div class="form-group">
-						<label for="nm">Nama Kriteria</label>
-						<input type="text" class="form-control" id="nm" name="nm" minlength="5" required="on">
+						<label for="nama">Nama Kriteria</label>
+						<input type="text" class="form-control" id="nama" name="nama" minlength="5" required="on">
 					</div>
 					<div class="btn-group">
 						<button type="submit" class="btn btn-dark">Simpan</button>

@@ -78,7 +78,7 @@ function showErrorToast() {
 
 function showStickyErrorToast() {
   $().toastmessage('showToast', {
-    text: 'Gagal total! Coba lagi',
+    text: 'Gagal! Silakan coba lagi',
     sticky: true,
     position: 'top-right',
     type: 'error',

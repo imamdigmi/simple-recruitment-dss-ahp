@@ -1,38 +1,52 @@
 <?php
 include_once('includes/header.inc.php');
 include_once('includes/bobot.inc.php');
+include_once('includes/kriteria.inc.php');
 
-$pro = new Bobot($db);
-$stmt2 = $pro->readAll2();
-$stmt3 = $pro->readAll2();
-$count = $pro->countAll();
+$bobotObj = new Bobot($db);
+$count = $bobotObj->countAll();
 
-if(isset($_POST['subankr'])){
-	$pro->insert($_POST['C11'],$_POST['nl1'],$_POST['C21'])?'':$pro->update($_POST['C11'],$_POST['nl1'],$_POST['C21']);
-	$pro->insert($_POST['C12'],$_POST['nl2'],$_POST['C32'])?'':$pro->update($_POST['C12'],$_POST['nl2'],$_POST['C32']);
-	$pro->insert($_POST['C13'],$_POST['nl3'],$_POST['C43'])?'':$pro->update($_POST['C13'],$_POST['nl3'],$_POST['C43']);
-	$pro->insert($_POST['C14'],$_POST['nl4'],$_POST['C54'])?'':$pro->update($_POST['C14'],$_POST['nl4'],$_POST['C54']);
-	$pro->insert($_POST['C25'],$_POST['nl5'],$_POST['C35'])?'':$pro->update($_POST['C25'],$_POST['nl5'],$_POST['C35']);
-	$pro->insert($_POST['C26'],$_POST['nl6'],$_POST['C46'])?'':$pro->update($_POST['C26'],$_POST['nl6'],$_POST['C46']);
-	$pro->insert($_POST['C27'],$_POST['nl7'],$_POST['C57'])?'':$pro->update($_POST['C27'],$_POST['nl7'],$_POST['C57']);
-	$pro->insert($_POST['C38'],$_POST['nl8'],$_POST['C48'])?'':$pro->update($_POST['C38'],$_POST['nl8'],$_POST['C48']);
-	$pro->insert($_POST['C39'],$_POST['nl9'],$_POST['C59'])?'':$pro->update($_POST['C39'],$_POST['nl9'],$_POST['C59']);
-	$pro->insert($_POST['C410'],$_POST['nl10'],$_POST['C510'])?'':$pro->update($_POST['C410'],$_POST['nl10'],$_POST['C510']);
+if(isset($_POST['submit'])){
+	$kriteriaObj = new Kriteria($db);
+	$kriteriaCount = $kriteriaObj->countAll();
 
-	$pro->insert($_POST['C21'],1/$_POST['nl1'],$_POST['C11'])?'':$pro->update($_POST['C21'],1/$_POST['nl1'],$_POST['C11']);
-	$pro->insert($_POST['C32'],1/$_POST['nl2'],$_POST['C12'])?'':$pro->update($_POST['C32'],1/$_POST['nl2'],$_POST['C12']);
-	$pro->insert($_POST['C43'],1/$_POST['nl3'],$_POST['C13'])?'':$pro->update($_POST['C43'],1/$_POST['nl3'],$_POST['C13']);
-	$pro->insert($_POST['C54'],1/$_POST['nl4'],$_POST['C14'])?'':$pro->update($_POST['C54'],1/$_POST['nl4'],$_POST['C14']);
-	$pro->insert($_POST['C35'],1/$_POST['nl5'],$_POST['C25'])?'':$pro->update($_POST['C35'],1/$_POST['nl5'],$_POST['C25']);
-	$pro->insert($_POST['C46'],1/$_POST['nl6'],$_POST['C26'])?'':$pro->update($_POST['C46'],1/$_POST['nl6'],$_POST['C26']);
-	$pro->insert($_POST['C57'],1/$_POST['nl7'],$_POST['C27'])?'':$pro->update($_POST['C57'],1/$_POST['nl7'],$_POST['C27']);
-	$pro->insert($_POST['C48'],1/$_POST['nl8'],$_POST['C38'])?'':$pro->update($_POST['C48'],1/$_POST['nl8'],$_POST['C38']);
-	$pro->insert($_POST['C59'],1/$_POST['nl9'],$_POST['C39'])?'':$pro->update($_POST['C59'],1/$_POST['nl9'],$_POST['C39']);
-	$pro->insert($_POST['C510'],1/$_POST['nl10'],$_POST['C410'])?'':$pro->update($_POST['C510'],1/$_POST['nl10'],$_POST['C410']);
+	$r = [];
+	$kriterias = $kriteriaObj->readAll();
+	while ($row = $kriterias->fetch(PDO::FETCH_ASSOC)) {
+		$kriteriass = $kriteriaObj->readSatu($row['id_kriteria']);
+		while ($roww = $kriteriass->fetch(PDO::FETCH_ASSOC)) {
+			$pcs = explode("C", $roww['id_kriteria']);
+			$c = $kriteriaCount - $pcs[1];
+		}
+		if ($c>=1) {
+			$r[$row['id_kriteria']] = $c;
+		}
+	}
+
+	$no=1;
+	foreach ($r as $k => $v) {
+		for ($i=1; $i<=$v; $i++) {
+			$pcs = explode("C", $k);
+			$nid = "C".($pcs[1]+$i);
+
+			if ($bobotObj->insert($_POST[$k.$no], $_POST['nl'.$no], $_POST[$nid.$no])) {
+				// ...
+			}else{
+				$bobotObj->update($_POST[$k.$no], $_POST['nl'.$no], $_POST[$nid.$no]);
+			}
+
+			if ($bobotObj->insert($_POST[$nid.$no], 1/$_POST['nl'.$no], $_POST[$k.$no])) {
+				// ...
+			}else{
+				$bobotObj->update($_POST[$nid.$no], 1/$_POST['nl'.$no], $_POST[$k.$no]);
+			}
+			$no++;
+		}
+	}
 }
 
-if(isset($_POST['hapus'])){
-	$pro->delete();
+if (isset($_POST['hapus'])) {
+	$bobotObj->delete();
 	header("location: analisa-kriteria.php");
 }
 ?>
@@ -58,27 +72,28 @@ if(isset($_POST['hapus'])){
       <thead>
         <tr>
           <th>Antar Kriteria</th>
-          <?php while ($row2 = $stmt2->fetch(PDO::FETCH_ASSOC)): ?>
-            <th><?php echo $row2['nama_kriteria'] ?></th>
+          <?php $bobots1 = $bobotObj->readAll2(); while ($row = $bobots1->fetch(PDO::FETCH_ASSOC)): ?>
+            <th><?=$row['nama_kriteria'] ?></th>
           <?php endwhile; ?>
         </tr>
       </thead>
       <tbody>
-				<?php while ($row3 = $stmt3->fetch(PDO::FETCH_ASSOC)): ?>
+				<?php $bobots2 = $bobotObj->readAll2(); while ($row1 = $bobots2->fetch(PDO::FETCH_ASSOC)): ?>
           <tr>
-            <th style="vertical-align:middle;"><?php echo $row3['nama_kriteria'] ?></th>
-            <?php $stmt4 = $pro->readAll2(); while ($row4 = $stmt4->fetch(PDO::FETCH_ASSOC)): ?>
+            <th style="vertical-align:middle;"><?=$row1['nama_kriteria'] ?></th>
+            <?php $bobots3 = $bobotObj->readAll2(); while ($row2 = $bobots3->fetch(PDO::FETCH_ASSOC)): ?>
               <td style="vertical-align:middle;">
               	<?php
-								if($row3['id_kriteria']==$row4['id_kriteria']){
+								if ($row1['id_kriteria'] == $row2['id_kriteria']) {
               		echo '1';
-              		if($pro->insert($row3['id_kriteria'],'1',$row4['id_kriteria'])){
-							  	} else {
-							  		$pro->update($row3['id_kriteria'],'1',$row4['id_kriteria']);
+              		if ($bobotObj->insert($row1['id_kriteria'], '1', $row2['id_kriteria'])) {
+										// ...
+									} else {
+							  		$bobotObj->update($row1['id_kriteria'], '1', $row2['id_kriteria']);
 							  	}
               	} else {
-              		$pro->readAll1($row3['id_kriteria'],$row4['id_kriteria']);
-              		echo number_format($pro->kp, 3, '.', ',');
+              		$bobotObj->readAll1($row1['id_kriteria'], $row2['id_kriteria']);
+              		echo number_format($bobotObj->kp, 3, '.', ',');
               	}
               	?>
               </td>
@@ -89,12 +104,12 @@ if(isset($_POST['hapus'])){
 			<tfoot>
 				<tr>
 					<th>Jumlah</th>
-					<?php $stmt5 = $pro->readAll2(); while ($row5 = $stmt5->fetch(PDO::FETCH_ASSOC)): ?>
+					<?php $stmt5 = $bobotObj->readAll2(); while ($row5 = $stmt5->fetch(PDO::FETCH_ASSOC)): ?>
 						<th>
 							<?php
-								$pro->readSum1($row5['id_kriteria']);
-								echo number_format($pro->nak, 3, '.', ',');
-								$pro->insert3($pro->nak,$row5['id_kriteria']);
+								$bobotObj->readSum1($row5['id_kriteria']);
+								echo number_format($bobotObj->nak, 3, '.', ',');
+								$bobotObj->insert3($bobotObj->nak, $row5['id_kriteria']);
 							?>
 						</th>
 					<?php endwhile; ?>
@@ -107,29 +122,29 @@ if(isset($_POST['hapus'])){
 				<tr>
 					<th>Perbandingan</th>
 					<?php
-					$stmt2x = $pro->readAll2();
-					$stmt3x = $pro->readAll2();
-					while ($row2x = $stmt2x->fetch(PDO::FETCH_ASSOC)): ?>
-						<th><?php echo $row2x['nama_kriteria'] ?></th>
+					$bobots1x = $bobotObj->readAll2();
+					$bobots2x = $bobotObj->readAll2();
+					while ($row2x = $bobots1x->fetch(PDO::FETCH_ASSOC)): ?>
+						<th><?=$row2x['nama_kriteria'] ?></th>
 					<?php endwhile; ?>
 					<th>Bobot</th>
 				</tr>
 			</thead>
 			<tbody>
-			<?php while ($row3x = $stmt3x->fetch(PDO::FETCH_ASSOC)): ?>
+			<?php while ($row3x = $bobots2x->fetch(PDO::FETCH_ASSOC)): ?>
 				<tr>
-					<th style="vertical-align:middle;"><?php echo $row3x['nama_kriteria'] ?></th>
-					<?php $stmt4x = $pro->readAll2(); while ($row4x = $stmt4x->fetch(PDO::FETCH_ASSOC)): ?>
+					<th style="vertical-align:middle;"><?=$row3x['nama_kriteria'] ?></th>
+					<?php $stmt4x = $bobotObj->readAll2(); while ($row4x = $stmt4x->fetch(PDO::FETCH_ASSOC)): ?>
 						<td style="vertical-align:middle;">
 						<?php
 							if($row3x['id_kriteria']==$row4x['id_kriteria']){
 								$hs1 = 1/$row4x['jumlah_kriteria'];
-								$pro->insert2($hs1,$row3x['id_kriteria'],$row4x['id_kriteria']);
+								$bobotObj->insert2($hs1,$row3x['id_kriteria'],$row4x['id_kriteria']);
 								echo number_format($hs1, 3, '.', ',');
 							} else {
-								$pro->readAll1($row3x['id_kriteria'],$row4x['id_kriteria']);
-								$jmk = $pro->kp/$row4x['jumlah_kriteria'];
-								$pro->insert2($jmk,$row3x['id_kriteria'],$row4x['id_kriteria']);
+								$bobotObj->readAll1($row3x['id_kriteria'],$row4x['id_kriteria']);
+								$jmk = $bobotObj->kp/$row4x['jumlah_kriteria'];
+								$bobotObj->insert2($jmk,$row3x['id_kriteria'],$row4x['id_kriteria']);
 								echo number_format($jmk, 3, '.', ',');
 							}
 							?>
@@ -137,9 +152,9 @@ if(isset($_POST['hapus'])){
 					<?php endwhile; ?>
 					<th style="vertical-align:middle;">
 						<?php
-						$pro->readAvg($row3x['id_kriteria']);
-						$bbt = $pro->hak;
-						$pro->insert4($bbt,$row3x['id_kriteria']);
+						$bobotObj->readAvg($row3x['id_kriteria']);
+						$bbt = $bobotObj->hak;
+						$bobotObj->insert4($bbt,$row3x['id_kriteria']);
 						echo number_format($bbt, 3, '.', ',');
 						?>
 					</th>
@@ -149,13 +164,13 @@ if(isset($_POST['hapus'])){
 			<tfoot>
 				<tr>
 					<th>Jumlah</th>
-					<?php $stmt5x = $pro->readAll2(); while ($row5x = $stmt5x->fetch(PDO::FETCH_ASSOC)): ?>
+					<?php $stmt5x = $bobotObj->readAll2(); while ($row5x = $stmt5x->fetch(PDO::FETCH_ASSOC)): ?>
 						<th>
-							<?php $pro->readSum2($row5x['id_kriteria']); echo number_format($pro->nak, 3, '.', ','); ?>
+							<?php $bobotObj->readSum2($row5x['id_kriteria']); echo number_format($bobotObj->nak, 3, '.', ','); ?>
 						</th>
 					<?php endwhile; ?>
 					<th>
-						<?php $pro->readSum3(); echo number_format($pro->bb, 3, '.', ','); ?>
+						<?php $bobotObj->readSum3(); echo number_format($bobotObj->bb, 3, '.', ','); ?>
 					</th>
 				</tr>
 			</tfoot>

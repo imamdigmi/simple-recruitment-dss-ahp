@@ -2,18 +2,18 @@
 include_once('includes/header.inc.php');
 include_once('includes/nilai.inc.php');
 
-$pgn = new Nilai($db);
+$nilObj = new Nilai($db);
 
 $id = isset($_GET['id']) ? $_GET['id'] : die('ERROR: missing ID.');
 
 include_once('includes/kriteria.inc.php');
-$eks = new Kriteria($db);
-$eks->id = $id;
-$eks->readOne();
+$kriObj = new Kriteria($db);
+$kriObj->id = $id;
+$kriObj->readOne();
 
 if($_POST){
-	$eks->nm = $_POST['nm'];
-	if($eks->update()){
+	$kriObj->nama = $_POST['nama'];
+	if($kriObj->update()){
 		echo "<script>location.href='data-kriteria.php'</script>";
 	} else{ ?>
 		<script type="text/javascript">
@@ -38,8 +38,12 @@ if($_POST){
 			<div class="panel-body">
 			<form method="post" id="form">
 				<div class="form-group">
-					<label for="kt">Nama Kriteria</label>
-					<input type="text" class="form-control" id="nm" name="nm" value="<?php echo $eks->nm; ?>" minlength="5" required="on">
+					<label for="id_kriteria">ID Kriteria</label>
+					<input type="text" class="form-control" id="id_kriteria" name="id_kriteria" value="<?php echo $kriObj->id; ?>" readonly>
+				</div>
+				<div class="form-group">
+					<label for="nama">Nama Kriteria</label>
+					<input type="text" class="form-control" id="nama" name="nama" value="<?php echo $kriObj->nama; ?>" minlength="5" required="on">
 				</div>
 				<div class="btn-group">
 					<button type="submit" class="btn btn-dark">Ubah</button>

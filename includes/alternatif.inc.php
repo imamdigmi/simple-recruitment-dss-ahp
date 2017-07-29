@@ -71,6 +71,14 @@ class Alternatif {
 		// $this->skor_alternatif = $row['skor_alternatif'];
 	}
 
+	function readSatu($a) {
+		$query = "SELECT * FROM {$this->table_name} WHERE id_alternatif='$a' LIMIT 0,1";
+		$stmt = $this->conn->prepare( $query );
+		$stmt->execute();
+
+		return $stmt;
+	}
+
 	function getNewID() {
 		$query = "SELECT id_alternatif FROM {$this->table_name} ORDER BY id_alternatif DESC LIMIT 1";
 		$stmt = $this->conn->prepare($query);
