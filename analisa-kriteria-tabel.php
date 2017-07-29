@@ -1,16 +1,10 @@
 <?php
-
 include_once('includes/header.inc.php');
 include_once('includes/bobot.inc.php');
 include_once('includes/kriteria.inc.php');
 
 $bobotObj = new Bobot($db);
 $count = $bobotObj->countAll();
-
-// if (!$bobotObj->countAll1()) {
-// 	echo "<script>location.href='analisa-kriteria.php'</script>";
-// 	exit;
-// }
 
 if(isset($_POST['submit'])){
 	$kriteriaObj = new Kriteria($db);

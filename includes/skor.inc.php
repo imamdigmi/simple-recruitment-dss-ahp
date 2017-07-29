@@ -15,9 +15,10 @@ class Skor {
 		$this->conn = $db;
 	}
 
-	function insert($a,$b,$c,$d) {
-		$query = "INSERT INTO {$this->table_name} VALUES('$a','$b','','$c','$d')";
+	function insert($a, $b, $c, $d) {
+		$query = "INSERT INTO {$this->table_name} VALUES('$a', '$b', 0, '$c', '$d')";
 		$stmt = $this->conn->prepare($query);
+
 		if ($stmt->execute()) {
 			return true;
 		} else {
@@ -25,8 +26,8 @@ class Skor {
 		}
 	}
 
-	function insert2($a,$b,$c,$d) {
-		$query = "UPDATE {$this->table_name} SET hasil_analisa_alternatif = '$a' WHERE alternatif_pertama = '$b' AND alternatif_kedua = '$c' AND id_kriteria='$d'";
+	function insert2($a, $b, $c, $d) {
+		$query = "UPDATE {$this->table_name} SET hasil_analisa_alternatif='$a' WHERE alternatif_pertama='$b' AND alternatif_kedua='$c' AND id_kriteria='$d'";
 		$stmt = $this->conn->prepare($query);
 
 		if ($stmt->execute()) {
@@ -37,7 +38,7 @@ class Skor {
 	}
 
 	function insert3($a, $b, $c) {
-		$query = "INSERT INTO jum_alt_kri VALUES('$a','$b','$c','')";
+		$query = "INSERT INTO jum_alt_kri VALUES('$a', '$b', '$c', 0)";
 		$stmt = $this->conn->prepare($query);
 
 		if ($stmt->execute()) {
@@ -86,7 +87,7 @@ class Skor {
 	}
 
 	function readAll1($a, $b, $c) {
-		$query = "SELECT * FROM {$this->table_name} WHERE alternatif_pertama = '$a' AND alternatif_kedua = '$b' AND id_kriteria='$c' LIMIT 0,1";
+		$query = "SELECT * FROM {$this->table_name} WHERE alternatif_pertama='$a' AND alternatif_kedua='$b' AND id_kriteria='$c' LIMIT 0,1";
 		$stmt = $this->conn->prepare( $query );
 		$stmt->execute();
 
@@ -119,18 +120,20 @@ class Skor {
 		return $stmt->rowCount();
 	}
 
-	function readSum1($a,$b) {
-		$query = "SELECT sum(nilai_analisa_alternatif) AS jumkr FROM {$this->table_name} WHERE alternatif_kedua = '$a' AND id_kriteria='$b' ";
+	function readSum1($a, $b) {
+		$query = "SELECT sum(nilai_analisa_alternatif) AS jumkr FROM {$this->table_name} WHERE alternatif_kedua='$a' AND id_kriteria='$b' ";
 		$stmt = $this->conn->prepare( $query );
 		$stmt->execute();
+
 		$row = $stmt->fetch(PDO::FETCH_ASSOC);
 		$this->nak = $row['jumkr'];
 	}
 
-	function readSum2($a,$b) {
-		$query = "SELECT sum(hasil_analisa_alternatif) AS jumkr2 FROM {$this->table_name} WHERE alternatif_kedua = '$a' AND id_kriteria = '$b'";
+	function readSum2($a, $b) {
+		$query = "SELECT sum(hasil_analisa_alternatif) AS jumkr2 FROM {$this->table_name} WHERE alternatif_kedua='$a' AND id_kriteria='$b'";
 		$stmt = $this->conn->prepare( $query );
 		$stmt->execute();
+
 		$row = $stmt->fetch(PDO::FETCH_ASSOC);
 		$this->nak = $row['jumkr2'];
 	}
@@ -139,14 +142,16 @@ class Skor {
 		$query = "SELECT sum(skor_alt_kri) AS bbkr FROM jum_alt_kri WHERE id_kriteria='$a'";
 		$stmt = $this->conn->prepare( $query );
 		$stmt->execute();
+
 		$row = $stmt->fetch(PDO::FETCH_ASSOC);
 		$this->bb = $row['bbkr'];
 	}
 
 	function readAvg($a) {
-		$query = "SELECT avg(hasil_analisa_alternatif) AS avgkr FROM {$this->table_name} WHERE alternatif_pertama = '$a'";
+		$query = "SELECT avg(hasil_analisa_alternatif) AS avgkr FROM {$this->table_name} WHERE alternatif_pertama='$a'";
 		$stmt = $this->conn->prepare( $query );
 		$stmt->execute();
+
 		$row = $stmt->fetch(PDO::FETCH_ASSOC);
 		$this->hak = $row['avgkr'];
 	}
@@ -155,15 +160,15 @@ class Skor {
 		$query = "SELECT * FROM data_kriteria WHERE id_kriteria='$a'";
 		$stmt = $this->conn->prepare( $query );
 		$stmt->execute();
+
 		$row = $stmt->fetch(PDO::FETCH_ASSOC);
 		$this->kri = $row['nama_kriteria'];
 	}
 
-	// update the product
-	function update($a,$b,$c,$d) {
-		$query = "UPDATE  ".$this->table_name."  SET nilai_analisa_alternatif = '$b' WHERE alternatif_pertama = '$a' and alternatif_kedua = '$c' and id_kriteria = '$d'";
+	function update($a, $b, $c, $d) {
+		$query = "UPDATE  {$this->table_name}  SET nilai_analisa_alternatif='$b' WHERE alternatif_pertama='$a' and alternatif_kedua='$c' and id_kriteria='$d'";
 		$stmt = $this->conn->prepare($query);
-		// execute the query
+
 		if ($stmt->execute()) {
 			return true;
 		} else {
@@ -171,9 +176,8 @@ class Skor {
 		}
 	}
 
-	// delete the product
 	function delete() {
-		$query = "DELETE FROM " . $this->table_name;
+		$query = "DELETE FROM {$this->table_name}";
 		$stmt = $this->conn->prepare($query);
 
 		if ($result = $stmt->execute()) {
