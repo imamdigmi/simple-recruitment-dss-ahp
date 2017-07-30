@@ -37,7 +37,7 @@ class Skor {
 	}
 
 	function insert3($a, $b, $c) {
-		$query = "INSERT INTO jum_alt_kri VALUES($a, $b, $c, 0, 0)";
+		$query = "INSERT INTO jum_alt_kri VALUES('$a', '$b', $c, 0, 0)";
 		$stmt = $this->conn->prepare($query);
 
 		if ($stmt->execute()) {
