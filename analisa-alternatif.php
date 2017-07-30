@@ -125,7 +125,7 @@ while ($row = $alt1->fetch(PDO::FETCH_ASSOC)) {
 							<?php endwhile; $no++; ?>
 						<?php endfor; ?>
 					<?php endforeach; ?>
-					<button type="submit" name="subankr" class="btn btn-dark"> Selanjutnya <span class="fa fa-arrow-right"></span></button>
+					<button type="submit" name="submit" class="btn btn-dark"> Selanjutnya <span class="fa fa-arrow-right"></span></button>
 				</form>
 			</div>
 		</div>

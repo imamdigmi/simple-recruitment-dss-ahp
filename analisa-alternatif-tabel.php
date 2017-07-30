@@ -1,41 +1,48 @@
 <?php
 include_once('includes/header.inc.php');
 include_once('includes/skor.inc.php');
+include_once('includes/alternatif.inc.php');
 
 $skoObj = new Skor($db);
 $altkriteria = isset($_POST['kriteria']) ? $_POST['kriteria'] : $_GET['kriteria'];
-$stmt2 = $skoObj->readAll2();
-$stmt3 = $skoObj->readAll2();
 
-if(isset($altkriteria)){
+if (isset($altkriteria)) {
 	$skoObj->readKri($altkriteria);
 	$count = $skoObj->countAll();
 
-	if(isset($_POST['subankr'])){
-		$skoObj->insert($_POST['A11'],$_POST['nl1'],$_POST['A21'],$altkriteria) ? '' : $skoObj->update($_POST['A11'],$_POST['nl1'],$_POST['A21'],$altkriteria);
-		$skoObj->insert($_POST['A12'],$_POST['nl2'],$_POST['A32'],$altkriteria) ? '' : $skoObj->update($_POST['A12'],$_POST['nl2'],$_POST['A32'],$altkriteria);
-		$skoObj->insert($_POST['A13'],$_POST['nl3'],$_POST['A43'],$altkriteria) ? '' : $skoObj->update($_POST['A13'],$_POST['nl3'],$_POST['A43'],$altkriteria);
-		$skoObj->insert($_POST['A14'],$_POST['nl4'],$_POST['A54'],$altkriteria) ? '' : $skoObj->update($_POST['A14'],$_POST['nl4'],$_POST['A54'],$altkriteria);
-		$skoObj->insert($_POST['A25'],$_POST['nl5'],$_POST['A35'],$altkriteria) ? '' : $skoObj->update($_POST['A25'],$_POST['nl5'],$_POST['A35'],$altkriteria);
-		$skoObj->insert($_POST['A26'],$_POST['nl6'],$_POST['A46'],$altkriteria) ? '' : $skoObj->update($_POST['A26'],$_POST['nl6'],$_POST['A46'],$altkriteria);
-		$skoObj->insert($_POST['A27'],$_POST['nl7'],$_POST['A57'],$altkriteria) ? '' : $skoObj->update($_POST['A27'],$_POST['nl7'],$_POST['A57'],$altkriteria);
-		$skoObj->insert($_POST['A38'],$_POST['nl8'],$_POST['A48'],$altkriteria) ? '' : $skoObj->update($_POST['A38'],$_POST['nl8'],$_POST['A48'],$altkriteria);
-		$skoObj->insert($_POST['A39'],$_POST['nl9'],$_POST['A59'],$altkriteria) ? '' : $skoObj->update($_POST['A39'],$_POST['nl9'],$_POST['A59'],$altkriteria);
-		$skoObj->insert($_POST['A410'],$_POST['nl10'],$_POST['A510'],$altkriteria) ? '' : $skoObj->update($_POST['A410'],$_POST['nl10'],$_POST['A510'],$altkriteria);
+	if (isset($_POST['submit'])) {
+		$altObj = new Alternatif($db);
+		$altCount = $altObj->countAll();
 
-		$skoObj->insert($_POST['A21'],1/$_POST['nl1'],$_POST['A11'],$altkriteria) ? '' : $skoObj->update($_POST['A21'],1/$_POST['nl1'],$_POST['A11'],$altkriteria);
-		$skoObj->insert($_POST['A32'],1/$_POST['nl2'],$_POST['A12'],$altkriteria) ? '' : $skoObj->update($_POST['A32'],1/$_POST['nl2'],$_POST['A12'],$altkriteria);
-		$skoObj->insert($_POST['A43'],1/$_POST['nl3'],$_POST['A13'],$altkriteria) ? '' : $skoObj->update($_POST['A43'],1/$_POST['nl3'],$_POST['A13'],$altkriteria);
-		$skoObj->insert($_POST['A54'],1/$_POST['nl4'],$_POST['A14'],$altkriteria) ? '' : $skoObj->update($_POST['A54'],1/$_POST['nl4'],$_POST['A14'],$altkriteria);
-		$skoObj->insert($_POST['A35'],1/$_POST['nl5'],$_POST['A25'],$altkriteria) ? '' : $skoObj->update($_POST['A35'],1/$_POST['nl5'],$_POST['A25'],$altkriteria);
-		$skoObj->insert($_POST['A46'],1/$_POST['nl6'],$_POST['A26'],$altkriteria) ? '' : $skoObj->update($_POST['A46'],1/$_POST['nl6'],$_POST['A26'],$altkriteria);
-		$skoObj->insert($_POST['A57'],1/$_POST['nl7'],$_POST['A27'],$altkriteria) ? '' : $skoObj->update($_POST['A57'],1/$_POST['nl7'],$_POST['A27'],$altkriteria);
-		$skoObj->insert($_POST['A48'],1/$_POST['nl8'],$_POST['A38'],$altkriteria) ? '' : $skoObj->update($_POST['A48'],1/$_POST['nl8'],$_POST['A38'],$altkriteria);
-		$skoObj->insert($_POST['A59'],1/$_POST['nl9'],$_POST['A39'],$altkriteria) ? '' : $skoObj->update($_POST['A59'],1/$_POST['nl9'],$_POST['A39'],$altkriteria);
-		$skoObj->insert($_POST['A510'],1/$_POST['nl10'],$_POST['A410'],$altkriteria) ? '' : $skoObj->update($_POST['A510'],1/$_POST['nl10'],$_POST['A410'],$altkriteria);
+		$r = [];
+		$alt1 = $altObj->readAll();
+		while ($row = $alt1->fetch(PDO::FETCH_ASSOC)) {
+			$alt2 = $altObj->readSatu($row['id_alternatif']);
+			while ($roww = $alt2->fetch(PDO::FETCH_ASSOC)) {
+				$pcs = explode("A", $roww['id_alternatif']);
+				$c = $altCount - $pcs[1];
+			}
+			if ($c>=1) {
+				$r[$row['id_alternatif']] = $c;
+			}
+		}
+
+		$no=1;
+		foreach ($r as $k => $v) {
+			for ($i=1; $i<=$v; $i++) {
+				$pcs = explode("A", $k);
+				$nid = "A".($pcs[1]+$i);
+				if ($skoObj->insert($_POST[$k.$no], $_POST['nl'.$no], $_POST[$nid.$no], $altkriteria)) {
+					// ...
+				} else {
+					$skoObj->update($_POST[$k.$no], $_POST['nl'.$no], $_POST[$nid.$no], $altkriteria);
+				}
+				$no++;
+			}
+		}
 	}
 
-	if(isset($_POST['hapus'])){
+	if (isset($_POST['hapus'])) {
 		$skoObj->delete();
 		echo "<script>location.href='analisa-alternatif.php'</script>";
 		exit;
@@ -62,48 +69,59 @@ if(isset($altkriteria)){
 			<table width="100%" class="table table-striped table-bordered">
         <thead>
 					<tr>
-						<th><?php echo $skoObj->kri ?></th>
-						<?php while ($row2 = $stmt2->fetch(PDO::FETCH_ASSOC)): ?>
-							<th><?php echo $row2['nama'] ?></th>
+						<th><?=$skoObj->kri?></th>
+						<?php $alt1a = $skoObj->readAll2(); while ($row = $alt1a->fetch(PDO::FETCH_ASSOC)): ?>
+							<th><?=$row['nama']?></th>
 						<?php endwhile; ?>
 					</tr>
         </thead>
 				<tbody>
-				<?php while ($row3 = $stmt3->fetch(PDO::FETCH_ASSOC)): ?>
-					<tr>
-						<th style="vertical-align:middle;"><?php echo $row3['nama'] ?></th>
-						<?php $stmt4 = $skoObj->readAll2(); while ($row4 = $stmt4->fetch(PDO::FETCH_ASSOC)): ?>
-							<td style="vertical-align:middle;">
-							<?php
-							if($row3['id_alternatif']==$row4['id_alternatif']){
-								echo '1';
-								if($skoObj->insert($row3['id_alternatif'],'1',$row4['id_alternatif'],$altkriteria)){
-									// ...
-								} else{
-									$skoObj->update($row3['id_alternatif'],'1',$row4['id_alternatif'],$altkriteria);
-								}
-							} else {
-								$skoObj->readAll1($row3['id_alternatif'],$row4['id_alternatif'],$altkriteria);
-								echo number_format($skoObj->kp, 3, '.', ',');
-							}
-							?>
-							</td>
-						<?php endwhile; ?>
-					</tr>
-				<?php endwhile; ?>
+					<?php $alt2a = $skoObj->readAll2(); while ($baris = $alt2a->fetch(PDO::FETCH_ASSOC)): ?>
+						<tr>
+							<th class="active"><?=$baris['nama']?></th>
+							<?php $alt3a = $skoObj->readAll2(); while ($kolom = $alt3a->fetch(PDO::FETCH_ASSOC)): ?>
+								<td>
+									<?php
+									if ($baris['id_alternatif'] == $kolom['id_alternatif']) {
+										echo '1';
+										if(!$skoObj->insert($baris['id_alternatif'], '1', $kolom['id_alternatif'], $altkriteria)){
+											$skoObj->update($baris['id_alternatif'], '1', $kolom['id_alternatif'], $altkriteria);
+										}
+									} else {
+										if ($baris["id_alternatif"] == "A1") {
+											$skoObj->readAll1($baris['id_alternatif'], $kolom['id_alternatif'], $altkriteria);
+											echo $n = number_format($skoObj->nak, 4, '.', ',');
+											if (!$skoObj->insert($baris['id_alternatif'], $n, $kolom['id_alternatif'], $altkriteria)){
+												$skoObj->update($baris['id_alternatif'], $n, $kolom['id_alternatif'], $altkriteria);
+											}
+										} else {
+											$skoObj->readAll4($baris['id_alternatif'], $altkriteria);
+											echo $skoObj->nak;
+											$n = ($skoObj->readAll5() == $kolom['id_alternatif']) ? $skoObj->nak : 1/$skoObj->nak;
+											echo $nn = number_format($n, 4, '.', ',');
+											if(!$skoObj->insert($baris['id_alternatif'], $nn, $kolom['id_alternatif'], $altkriteria)){
+												$skoObj->update($baris['id_alternatif'], $nn, $kolom['id_alternatif'], $altkriteria);
+											}
+										}
+									}
+									?>
+								</td>
+							<?php endwhile; ?>
+						</tr>
+					<?php endwhile; ?>
 				</tbody>
         <tfoot>
          	<tr>
 						<th>Jumlah</th>
-						<?php $stmt5 = $skoObj->readAll2(); while ($row5 = $stmt5->fetch(PDO::FETCH_ASSOC)): ?>
+						<?php $alt4a = $skoObj->readAll2(); while ($row = $alt4a->fetch(PDO::FETCH_ASSOC)): ?>
 						<th>
 							<?php
-								$skoObj->readSum1($row5['id_alternatif'],$altkriteria);
-								echo number_format($skoObj->nak, 3, '.', ',');
-								if($skoObj->insert3($row5['id_alternatif'],$altkriteria,$skoObj->nak)){
+								$skoObj->readSum1($row['id_alternatif'], $altkriteria);
+								echo number_format($skoObj->nak, 4, '.', ',');
+								if($skoObj->insert3($row['id_alternatif'], $altkriteria, $skoObj->nak)){
 									// ...
 								} else{
-									$skoObj->insert5($skoObj->nak,$row5['id_alternatif'],$altkriteria);
+									$skoObj->insert5($skoObj->nak, $row['id_alternatif'], $altkriteria);
 								}
 							?>
 						</th>
@@ -111,71 +129,6 @@ if(isset($altkriteria)){
           </tr>
         </tfoot>
 		 	</table>
-
-			<table width="100%" class="table table-striped table-bordered">
-	      <thead>
-		      <tr>
-	          <th>Perbandingan</th>
-	          <?php $stmt2x = $skoObj->readAll2(); $stmt3x = $skoObj->readAll2(); while ($row2x = $stmt2x->fetch(PDO::FETCH_ASSOC)): ?>
-		          <th><?php echo $row2x['nama'] ?></th>
-	          <?php endwhile; ?>
-	          <th>Skor</th>
-		      </tr>
-	      </thead>
-	      <tbody>
-				<?php while ($row3x = $stmt3x->fetch(PDO::FETCH_ASSOC)): ?>
-	        <tr>
-	          <th style="vertical-align:middle;"><?php echo $row3x['nama'] ?></th>
-	          <?php $stmt4x = $skoObj->readAll2(); while ($row4x = $stmt4x->fetch(PDO::FETCH_ASSOC)): ?>
-	            <td style="vertical-align:middle;">
-	            	<?php
-	                $skoObj->readAll3($row4x['id_alternatif'],$altkriteria);
-	                $jakx = $skoObj->jak;
-		            	if($row3x['id_alternatif']==$row4x['id_alternatif']){
-		            		$hs1 = 1/$jakx;
-		            		$skoObj->insert2($hs1,$row3x['id_alternatif'],$row4x['id_alternatif'],$altkriteria);
-		            		echo number_format($hs1, 3, '.', ',');
-		            	} else{
-		            		$skoObj->readAll1($row3x['id_alternatif'],$row4x['id_alternatif'],$altkriteria);
-	                  $kpx = $skoObj->kp;
-		            		$jmk = $kpx/$jakx;
-		            		$skoObj->insert2($jmk,$row3x['id_alternatif'],$row4x['id_alternatif'],$altkriteria);
-		            		echo number_format($jmk, 3, '.', ',');
-		            	}
-	            	?>
-	            </td>
-	          <?php endwhile; ?>
-						<th style="vertical-align:middle;">
-							<?php
-								$skoObj->readAvg($row3x['id_alternatif']);
-								$bbt = $skoObj->hak;
-								$skoObj->insert4($bbt,$row3x['id_alternatif'],$altkriteria);
-								echo number_format($bbt, 3, '.', ',');
-							?>
-						</th>
-	        </tr>
-				<?php endwhile; ?>
-	      </tbody>
-	      <tfoot>
-			   	<tr>
-	          <th>Jumlah</th>
-	          <?php $stmt5x = $skoObj->readAll2(); while ($row5x = $stmt5x->fetch(PDO::FETCH_ASSOC)): ?>
-	          <th>
-							<?php
-		          	$skoObj->readSum2($row5x['id_alternatif'],$altkriteria);
-		          	echo number_format($skoObj->nak, 3, '.', ',');
-		          ?>
-						</th>
-	          <?php endwhile; ?>
-	          <th>
-							<?php
-		          	$skoObj->readSum3($altkriteria);
-		          	echo number_format($skoObj->bb, 3, '.', ',');
-		          ?>
-						</th>
-			     </tr>
-	      </tfoot>
-		  </table>
 		</div>
 	</div>
 <?php } else {

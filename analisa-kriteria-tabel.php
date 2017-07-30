@@ -28,10 +28,17 @@ if(isset($_POST['submit'])){
 		for ($i=1; $i<=$v; $i++) {
 			$pcs = explode("C", $k);
 			$nid = "C".($pcs[1]+$i);
+
 			if ($bobotObj->insert($_POST[$k.$no], $_POST['nl'.$no], $_POST[$nid.$no])) {
 				// ...
 			} else {
 				$bobotObj->update($_POST[$k.$no], $_POST['nl'.$no], $_POST[$nid.$no]);
+			}
+
+			if ($bobotObj->insert($_POST[$nid.$no], 1/$_POST['nl'.$no], $_POST[$k.$no])) {
+				// ...
+			} else {
+				$bobotObj->update($_POST[$nid.$no], 1/$_POST['nl'.$no], $_POST[$k.$no]);
 			}
 			$no++;
 		}
@@ -40,8 +47,7 @@ if(isset($_POST['submit'])){
 
 if (isset($_POST['hapus'])) {
 	$bobotObj->delete();
-	echo "<script>location.href='analisa-kriteria.php'</script>";
-	exit;
+	header("location: analisa-kriteria.php");
 }
 ?>
 <div class="row">
@@ -74,30 +80,20 @@ if (isset($_POST['hapus'])) {
       <tbody>
 				<?php $bobots2 = $bobotObj->readAll2(); while ($baris = $bobots2->fetch(PDO::FETCH_ASSOC)): ?>
           <tr>
-            <th class="active"><?=ucwords($baris['nama_kriteria'])?></th>
+            <th class="active"><?=$baris['nama_kriteria'] ?></th>
             <?php $bobots3 = $bobotObj->readAll2(); while ($kolom = $bobots3->fetch(PDO::FETCH_ASSOC)): ?>
               <td>
               	<?php
 								if ($baris['id_kriteria'] == $kolom['id_kriteria']) {
               		echo '1';
-              		if (!$bobotObj->insert($baris['id_kriteria'], '1', $kolom['id_kriteria'])) {
+              		if ($bobotObj->insert($baris['id_kriteria'], '1', $kolom['id_kriteria'])) {
+										// ...
+									} else {
 							  		$bobotObj->update($baris['id_kriteria'], '1', $kolom['id_kriteria']);
 							  	}
               	} else {
-									if ($baris["id_kriteria"] == "C1") {
-										$bobotObj->readAll1($baris['id_kriteria'], $kolom['id_kriteria']);
-										echo $n = number_format($bobotObj->nak, 4, '.', ',');
-	              		if (!$bobotObj->insert($baris['id_kriteria'], $n, $kolom['id_kriteria'])) {
-								  		$bobotObj->update($baris['id_kriteria'], $n, $kolom['id_kriteria']);
-								  	}
-									} else {
-										$bobotObj->readAll3($baris['id_kriteria']);
-										$n = ($bobotObj->readAll4() == $kolom['id_kriteria']) ? $bobotObj->nak : 1/$bobotObj->nak;
-										echo $nn = number_format($n, 4, '.', ',');
-	              		if (!$bobotObj->insert($baris['id_kriteria'], $nn, $kolom['id_kriteria'])) {
-								  		$bobotObj->update($baris['id_kriteria'], $nn, $kolom['id_kriteria']);
-								  	}
-									}
+              		$bobotObj->readAll1($baris['id_kriteria'], $kolom['id_kriteria']);
+              		echo number_format($bobotObj->kp, 4, '.', ',');
               	}
               	?>
               </td>
@@ -108,11 +104,11 @@ if (isset($_POST['hapus'])) {
 			<tfoot>
 				<tr class="info">
 					<th>Jumlah</th>
-					<?php $bobots4 = $bobotObj->readAll2(); while ($row = $bobots4->fetch(PDO::FETCH_ASSOC)): ?>
+					<?php $stmt5 = $bobotObj->readAll2(); while ($row = $stmt5->fetch(PDO::FETCH_ASSOC)): ?>
 						<th>
 							<?php
 								$bobotObj->readSum1($row['id_kriteria']);
-								echo number_format($bobotObj->nak, 4, '.', ',');
+								echo number_format($bobotObj->nak, 3, '.', ',');
 								$bobotObj->insert3($bobotObj->nak, $row['id_kriteria']);
 							?>
 						</th>
@@ -125,51 +121,51 @@ if (isset($_POST['hapus'])) {
 			<thead>
 				<tr>
 					<th>Perbandingan</th>
-					<?php $bobots1x = $bobotObj->readAll2(); while ($row = $bobots1x->fetch(PDO::FETCH_ASSOC)): ?>
-						<th><?=$row['nama_kriteria'] ?></th>
+					<?php $bobots1x = $bobotObj->readAll2(); while ($row2x = $bobots1x->fetch(PDO::FETCH_ASSOC)): ?>
+						<th><?=$row2x['nama_kriteria'] ?></th>
 					<?php endwhile; ?>
 					<th class="info">Jumlah</th>
 					<th class="success">Prioritas</th>
 				</tr>
 			</thead>
 			<tbody>
-				<?php $bobots2x = $bobotObj->readAll2(); while ($row1 = $bobots2x->fetch(PDO::FETCH_ASSOC)): ?>
-					<tr>
-						<th class="active"><?=$row1['nama_kriteria'] ?></th>
-						<?php $bobots3x = $bobotObj->readAll2(); while ($row2 = $bobots3x->fetch(PDO::FETCH_ASSOC)): ?>
-							<td>
-							<?php
-								if ($row1['id_kriteria'] == $row2['id_kriteria']) {
-									$c = 1/$row2['jumlah_kriteria'];
-									$bobotObj->insert2($c, $row1['id_kriteria'], $row2['id_kriteria']);
-									echo number_format($c, 4, '.', ',');
-								} else {
-									$bobotObj->readAll1($row1['id_kriteria'], $row2['id_kriteria']);
-									$c = $bobotObj->nak / $row2['jumlah_kriteria'];
-									$bobotObj->insert2($c, $row1['id_kriteria'], $row2['id_kriteria']);
-									echo number_format($c, 4, '.', ',');
-								}
-								?>
-							</td>
-						<?php endwhile; ?>
-						<th class="info">
-							<?php
-							$bobotObj->readSum2($row1['id_kriteria']);
-							$j = $bobotObj->hak;
-							// $bobotObj->insert4($j, $row1['id_kriteria']);
-							echo number_format($j, 4, '.', ',');
+			<?php $bobots2x = $bobotObj->readAll2(); while ($baris = $bobots2x->fetch(PDO::FETCH_ASSOC)): ?>
+				<tr>
+					<th class="active"><?=$baris['nama_kriteria'] ?></th>
+					<?php $stmt4x = $bobotObj->readAll2(); while ($kolom = $stmt4x->fetch(PDO::FETCH_ASSOC)): ?>
+						<td>
+						<?php
+							if ($baris['id_kriteria'] == $kolom['id_kriteria']) {
+								$c = 1/$kolom['jumlah_kriteria'];
+								$bobotObj->insert2($c, $baris['id_kriteria'], $kolom['id_kriteria']);
+								echo number_format($c, 4, '.', ',');
+							} else {
+								$bobotObj->readAll1($baris['id_kriteria'], $kolom['id_kriteria']);
+								$c = $bobotObj->kp/$kolom['jumlah_kriteria'];
+								$bobotObj->insert2($c, $baris['id_kriteria'], $kolom['id_kriteria']);
+								echo number_format($c, 4, '.', ',');
+							}
 							?>
-						</th>
-						<th class="success">
-							<?php
-							$bobotObj->readAvg($row1['id_kriteria']);
-							$b = $bobotObj->hak;
-							$bobotObj->insert4($b, $row1['id_kriteria']);
-							echo number_format($b, 4, '.', ',');
-							?>
-						</th>
-					</tr>
-				<?php endwhile; ?>
+						</td>
+					<?php endwhile; ?>
+					<th class="info">
+						<?php
+						$bobotObj->readSum2($baris['id_kriteria']);
+						$j = $bobotObj->hak;
+						// $bobotObj->insert4($j, $baris['id_kriteria']);
+						echo number_format($j, 4, '.', ',');
+						?>
+					</th>
+					<th class="success">
+						<?php
+						$bobotObj->readAvg($baris['id_kriteria']);
+						$b = $bobotObj->hak;
+						$bobotObj->insert4($b, $baris['id_kriteria']);
+						echo number_format($b, 4, '.', ',');
+						?>
+					</th>
+				</tr>
+			<?php endwhile; ?>
 			</tbody>
 		</table>
 
@@ -184,19 +180,19 @@ if (isset($_POST['hapus'])) {
 				</tr>
 			</thead>
 			<tbody>
-				<?php $sumRow = []; $bobots2y = $bobotObj->readAll2(); while ($row1 = $bobots2y->fetch(PDO::FETCH_ASSOC)): ?>
+				<?php $sumRow = []; $bobots2y = $bobotObj->readAll2(); while ($baris = $bobots2y->fetch(PDO::FETCH_ASSOC)): ?>
 					<tr>
-						<th class="active"><?=$row1['nama_kriteria'] ?></th>
-						<?php $jumlah = 0; $bobots3y = $bobotObj->readAll2(); while ($row2 = $bobots3y->fetch(PDO::FETCH_ASSOC)): ?>
+						<th class="active"><?=$baris['nama_kriteria'] ?></th>
+						<?php $jumlah = 0; $bobots3y = $bobotObj->readAll2(); while ($kolom = $bobots3y->fetch(PDO::FETCH_ASSOC)): ?>
 							<td>
 							<?php
-								if ($row1['id_kriteria'] == $row2['id_kriteria']) {
-									$c = $row2['bobot_kriteria'] * 1;
+								if ($baris['id_kriteria'] == $kolom['id_kriteria']) {
+									$c = $kolom['bobot_kriteria'] * 1;
 									echo number_format($c, 4, '.', ',');
 									$jumlah += $c;
 								} else {
-									$bobotObj->readAll1($row1['id_kriteria'], $row2['id_kriteria']);
-									$c = $row2['bobot_kriteria'] * $bobotObj->nak;
+									$bobotObj->readAll1($baris['id_kriteria'], $kolom['id_kriteria']);
+									$c = $kolom['bobot_kriteria'] * $bobotObj->kp;
 									echo number_format($c, 4, '.', ',');
 									$jumlah += $c;
 								}
@@ -205,7 +201,7 @@ if (isset($_POST['hapus'])) {
 						<?php endwhile; ?>
 						<th class="info">
 							<?php
-							$sumRow[$row1['id_kriteria']] = $jumlah;
+							$sumRow[$baris['id_kriteria']] = $jumlah;
 							echo number_format($jumlah, 4, '.', ',');
 							?>
 						</th>
@@ -255,7 +251,7 @@ if (isset($_POST['hapus'])) {
 				</tr>
 				<tr>
 					<th>IR</th>
-					<td><?php echo $ir = 1.12; ?></td>
+					<td><?php echo $ir = $bobotObj->getIr($count); ?></td>
 				</tr>
 				<tr>
 					<th>CI</th>
@@ -267,7 +263,6 @@ if (isset($_POST['hapus'])) {
 				</tr>
 			</tbody>
 		</table>
-
 	</div>
 </div>
 

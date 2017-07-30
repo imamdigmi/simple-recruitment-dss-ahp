@@ -70,7 +70,7 @@ class Bobot {
 		$stmt = $this->conn->prepare( $query );
 		$stmt->execute();
 		$row = $stmt->fetch(PDO::FETCH_ASSOC);
-		$this->nak = $row['nilai_analisa_kriteria'];
+		$this->kp = $row['nilai_analisa_kriteria'];
 	}
 
 	function readAll2() {
@@ -80,33 +80,9 @@ class Bobot {
 		return $stmt;
 	}
 
-	function readAll3($x) {
-		$query = "SELECT * FROM {$this->table_name} WHERE kriteria_pertama='C1' AND kriteria_kedua = '$x' LIMIT 0,1";
-		$stmt = $this->conn->prepare( $query );
-		$stmt->execute();
-		$row = $stmt->fetch(PDO::FETCH_ASSOC);
-		$this->nak = $row['nilai_analisa_kriteria'];
-	}
-
-	function readAll4() {
-		$query = "SELECT * FROM data_kriteria ORDER BY id_kriteria DESC LIMIT 0,1 ";
-		$stmt = $this->conn->prepare( $query );
-		$stmt->execute();
-		$row = $stmt->fetch(PDO::FETCH_ASSOC);
-		return $row['id_kriteria'];
-	}
-
 	function countAll() {
 		$query = "SELECT * FROM data_kriteria";
 		$stmt = $this->conn->prepare( $query );
-		$stmt->execute();
-
-		return $stmt->rowCount();
-	}
-
-	function countAll1() {
-		$query = "SELECT * FROM {$this->table_name}";
-		$stmt = $this->conn->prepare($query);
 		$stmt->execute();
 
 		return $stmt->rowCount();
@@ -120,8 +96,57 @@ class Bobot {
 		$this->nak = $row['jumkr'];
 	}
 
+	function getIr($n) {
+		switch ($n) {
+		case 3:
+			$r = 0.58;
+			break;
+		case 4:
+			$r = 0.90;
+			break;
+		case 5:
+			$r = 1.12;
+			break;
+		case 6:
+			$r = 1.24;
+			break;
+		case 7:
+			$r = 1.32;
+			break;
+		case 8:
+			$r = 1.41;
+			break;
+		case 9:
+			$r = 1.45;
+			break;
+		case 10:
+			$r = 1.49;
+			break;
+		case 11:
+			$r = 1.51;
+			break;
+		case 12:
+			$r = 1.48;
+			break;
+		case 13:
+			$r = 1.56;
+			break;
+		case 14:
+			$r = 1.57;
+			break;
+		case 15:
+			$r = 1.59;
+			break;
+
+		default:
+			$r = 0.00;
+			break;
+		}
+		return $r;
+	}
+
 	function readSum2($a) {
-		$query = "SELECT sum(hasil_analisa_kriteria) AS jumlah FROM {$this->table_name} WHERE kriteria_pertama = '$a'";
+		$query = "SELECT sum(hasil_analisa_kriteria) AS jumlah FROM {$this->table_name} WHERE kriteria_pertama='$a'";
 		$stmt = $this->conn->prepare( $query );
 		$stmt->execute();
 		$row = $stmt->fetch(PDO::FETCH_ASSOC);
