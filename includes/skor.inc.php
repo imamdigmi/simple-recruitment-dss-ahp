@@ -25,7 +25,7 @@ class Skor {
 		}
 	}
 
-	function insert2($a,$b,$c,$d) {
+	function insert2($a, $b, $c, $d) {
 		$query = "UPDATE {$this->table_name} SET hasil_analisa_alternatif = '$a' WHERE alternatif_pertama = '$b' AND alternatif_kedua = '$c' AND id_kriteria='$d'";
 		$stmt = $this->conn->prepare($query);
 
@@ -37,7 +37,7 @@ class Skor {
 	}
 
 	function insert3($a, $b, $c) {
-		$query = "INSERT INTO jum_alt_kri VALUES('$a','$b','$c','')";
+		$query = "INSERT INTO jum_alt_kri VALUES($a, $b, $c, 0, 0)";
 		$stmt = $this->conn->prepare($query);
 
 		if ($stmt->execute()) {
@@ -86,8 +86,8 @@ class Skor {
 	}
 
 	function readAll1($a, $b, $c) {
-		$query = "SELECT * FROM {$this->table_name} WHERE alternatif_pertama = '$a' AND alternatif_kedua = '$b' AND id_kriteria='$c' LIMIT 0,1";
-		$stmt = $this->conn->prepare( $query );
+		$query = "SELECT * FROM {$this->table_name} WHERE alternatif_pertama='$a' AND alternatif_kedua='$b' AND id_kriteria='$c' LIMIT 0,1";
+		$stmt = $this->conn->prepare($query);
 		$stmt->execute();
 
 		$row = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -119,16 +119,17 @@ class Skor {
 		return $stmt->rowCount();
 	}
 
-	function readSum1($a,$b) {
-		$query = "SELECT sum(nilai_analisa_alternatif) AS jumkr FROM {$this->table_name} WHERE alternatif_kedua = '$a' AND id_kriteria='$b' ";
+	function readSum1($a, $b) {
+		$query = "SELECT sum(nilai_analisa_alternatif) AS jumkr FROM {$this->table_name} WHERE alternatif_kedua='$a' AND id_kriteria='$b' ";
 		$stmt = $this->conn->prepare( $query );
 		$stmt->execute();
+
 		$row = $stmt->fetch(PDO::FETCH_ASSOC);
 		$this->nak = $row['jumkr'];
 	}
 
-	function readSum2($a,$b) {
-		$query = "SELECT sum(hasil_analisa_alternatif) AS jumkr2 FROM {$this->table_name} WHERE alternatif_kedua = '$a' AND id_kriteria = '$b'";
+	function readSum2($a, $b) {
+		$query = "SELECT sum(hasil_analisa_alternatif) AS jumkr2 FROM {$this->table_name} WHERE alternatif_kedua='$a' AND id_kriteria='$b'";
 		$stmt = $this->conn->prepare( $query );
 		$stmt->execute();
 		$row = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -136,6 +137,14 @@ class Skor {
 	}
 
 	function readSum3($a) {
+		$query = "SELECT sum(skor_alt_kri) AS bbkr FROM jum_alt_kri WHERE id_kriteria='$a'";
+		$stmt = $this->conn->prepare( $query );
+		$stmt->execute();
+		$row = $stmt->fetch(PDO::FETCH_ASSOC);
+		$this->bb = $row['bbkr'];
+	}
+
+	function readSum4($a) {
 		$query = "SELECT sum(skor_alt_kri) AS bbkr FROM jum_alt_kri WHERE id_kriteria='$a'";
 		$stmt = $this->conn->prepare( $query );
 		$stmt->execute();
@@ -159,11 +168,10 @@ class Skor {
 		$this->kri = $row['nama_kriteria'];
 	}
 
-	// update the product
 	function update($a,$b,$c,$d) {
 		$query = "UPDATE  ".$this->table_name."  SET nilai_analisa_alternatif = '$b' WHERE alternatif_pertama = '$a' and alternatif_kedua = '$c' and id_kriteria = '$d'";
 		$stmt = $this->conn->prepare($query);
-		// execute the query
+
 		if ($stmt->execute()) {
 			return true;
 		} else {
@@ -171,7 +179,6 @@ class Skor {
 		}
 	}
 
-	// delete the product
 	function delete() {
 		$query = "DELETE FROM " . $this->table_name;
 		$stmt = $this->conn->prepare($query);

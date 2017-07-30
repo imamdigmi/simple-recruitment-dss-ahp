@@ -108,7 +108,7 @@ if (isset($_POST['hapus'])) {
 						<th>
 							<?php
 								$bobotObj->readSum1($row['id_kriteria']);
-								echo number_format($bobotObj->nak, 3, '.', ',');
+								echo number_format($bobotObj->nak, 4, '.', ',');
 								$bobotObj->insert3($bobotObj->nak, $row['id_kriteria']);
 							?>
 						</th>
@@ -129,43 +129,42 @@ if (isset($_POST['hapus'])) {
 				</tr>
 			</thead>
 			<tbody>
-			<?php $bobots2x = $bobotObj->readAll2(); while ($baris = $bobots2x->fetch(PDO::FETCH_ASSOC)): ?>
-				<tr>
-					<th class="active"><?=$baris['nama_kriteria'] ?></th>
-					<?php $stmt4x = $bobotObj->readAll2(); while ($kolom = $stmt4x->fetch(PDO::FETCH_ASSOC)): ?>
-						<td>
-						<?php
-							if ($baris['id_kriteria'] == $kolom['id_kriteria']) {
-								$c = 1/$kolom['jumlah_kriteria'];
-								$bobotObj->insert2($c, $baris['id_kriteria'], $kolom['id_kriteria']);
-								echo number_format($c, 4, '.', ',');
-							} else {
-								$bobotObj->readAll1($baris['id_kriteria'], $kolom['id_kriteria']);
-								$c = $bobotObj->kp/$kolom['jumlah_kriteria'];
-								$bobotObj->insert2($c, $baris['id_kriteria'], $kolom['id_kriteria']);
-								echo number_format($c, 4, '.', ',');
-							}
+				<?php $bobots2x = $bobotObj->readAll2(); while ($baris = $bobots2x->fetch(PDO::FETCH_ASSOC)): ?>
+					<tr>
+						<th class="active"><?=$baris['nama_kriteria'] ?></th>
+						<?php $stmt4x = $bobotObj->readAll2(); while ($kolom = $stmt4x->fetch(PDO::FETCH_ASSOC)): ?>
+							<td>
+							<?php
+								if ($baris['id_kriteria'] == $kolom['id_kriteria']) {
+									$c = 1/$kolom['jumlah_kriteria'];
+									$bobotObj->insert2($c, $baris['id_kriteria'], $kolom['id_kriteria']);
+									echo number_format($c, 4, '.', ',');
+								} else {
+									$bobotObj->readAll1($baris['id_kriteria'], $kolom['id_kriteria']);
+									$c = $bobotObj->kp/$kolom['jumlah_kriteria'];
+									$bobotObj->insert2($c, $baris['id_kriteria'], $kolom['id_kriteria']);
+									echo number_format($c, 4, '.', ',');
+								}
+								?>
+							</td>
+						<?php endwhile; ?>
+						<th class="info">
+							<?php
+							$bobotObj->readSum2($baris['id_kriteria']);
+							$j = $bobotObj->hak;
+							echo number_format($j, 4, '.', ',');
 							?>
-						</td>
-					<?php endwhile; ?>
-					<th class="info">
-						<?php
-						$bobotObj->readSum2($baris['id_kriteria']);
-						$j = $bobotObj->hak;
-						// $bobotObj->insert4($j, $baris['id_kriteria']);
-						echo number_format($j, 4, '.', ',');
-						?>
-					</th>
-					<th class="success">
-						<?php
-						$bobotObj->readAvg($baris['id_kriteria']);
-						$b = $bobotObj->hak;
-						$bobotObj->insert4($b, $baris['id_kriteria']);
-						echo number_format($b, 4, '.', ',');
-						?>
-					</th>
-				</tr>
-			<?php endwhile; ?>
+						</th>
+						<th class="success">
+							<?php
+							$bobotObj->readAvg($baris['id_kriteria']);
+							$b = $bobotObj->hak;
+							$bobotObj->insert4($b, $baris['id_kriteria']);
+							echo number_format($b, 4, '.', ',');
+							?>
+						</th>
+					</tr>
+				<?php endwhile; ?>
 			</tbody>
 		</table>
 
