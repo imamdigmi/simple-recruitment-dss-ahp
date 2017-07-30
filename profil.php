@@ -7,9 +7,9 @@ $eks->id = $_SESSION['id_pengguna'];
 $eks->readOne();
 
 if($_POST){
-  $eks->nl = $_POST['nl'];
-  $eks->un = $_POST['un'];
-  $eks->pw = md5($_POST['pw']);
+  $eks->name = $_POST['name'];
+  $eks->username = $_POST['username'];
+  $eks->password = md5($_POST['password']);
   if($eks->update()){ ?>
     <script type="text/javascript">
       window.onload=function(){
