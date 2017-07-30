@@ -46,7 +46,6 @@ class Alternatif {
 	}
 
 	function readByRank() {
-		// "SELECT nim, nama, hasil_akhir, @curRank := @curRank + 1 AS rank FROM {$this->table_name} a, (SELECT @curRank := 0) r ORDER BY rank";
 		$query = "SELECT * FROM {$this->table_name} ORDER BY hasil_akhir DESC";
 		$stmt = $this->conn->prepare($query);
 		$stmt->execute();
@@ -102,7 +101,6 @@ class Alternatif {
 		return $result;
 	}
 
-	// update the product
 	function update() {
 		$query = "UPDATE {$this->table_name}
 				SET
@@ -126,7 +124,6 @@ class Alternatif {
 		$stmt->bindParam(':no_hp', $this->no_hp);
 		$stmt->bindParam(':id', $this->id);
 
-		// execute the query
 		if ($stmt->execute()) {
 			return true;
 		} else {
@@ -134,7 +131,6 @@ class Alternatif {
 		}
 	}
 
-	// delete the product
 	function delete() {
 		$query = "DELETE FROM {$this->table_name} WHERE id_alternatif = ?";
 		$stmt = $this->conn->prepare($query);
