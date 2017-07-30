@@ -106,7 +106,7 @@ if (isset($altkriteria)) {
         <tfoot>
          	<tr class="info">
 						<th>Jumlah</th>
-						<?php $alt4a = $skoObj->readAll2(); while ($row = $alt4a->fetch(PDO::FETCH_ASSOC)): ?>
+						<?php /*$jumlahBobot=[];*/ $alt4a = $skoObj->readAll2(); while ($row = $alt4a->fetch(PDO::FETCH_ASSOC)): ?>
 						<th>
 							<?php
 								$skoObj->readSum1($row['id_alternatif'], $altkriteria);
@@ -114,9 +114,10 @@ if (isset($altkriteria)) {
 								if (!$skoObj->insert3($row['id_alternatif'], $altkriteria, $skoObj->nak)) {
 									$skoObj->insert5($skoObj->nak, $row['id_alternatif'], $altkriteria);
 								}
+								// $jumlahBobot[$row["id_alternatif"]] = $skoObj->nak;
 							?>
 						</th>
-						<?php endwhile; ?>
+					<?php endwhile;?>
           </tr>
         </tfoot>
 		 	</table>
@@ -125,31 +126,31 @@ if (isset($altkriteria)) {
 	      <thead>
 		      <tr>
 	          <th>Perbandingan</th>
-	          <?php $stmt2x = $skoObj->readAll2(); $stmt3x = $skoObj->readAll2(); while ($row2x = $stmt2x->fetch(PDO::FETCH_ASSOC)): ?>
-		          <th><?php echo $row2x['nama'] ?></th>
+	          <?php $alt1b = $skoObj->readAll2(); while ($row = $alt1b->fetch(PDO::FETCH_ASSOC)): ?>
+		          <th><?=$row['nama']?></th>
 	          <?php endwhile; ?>
 	          <th class="success">Prioritas</th>
 		      </tr>
 	      </thead>
 	      <tbody>
-					<?php while ($baris = $stmt3x->fetch(PDO::FETCH_ASSOC)): ?>
+					<?php $alt2b = $skoObj->readAll2(); while ($baris = $alt2b->fetch(PDO::FETCH_ASSOC)): ?>
 		        <tr>
 		          <th class="active"><?=$baris['nama']?></th>
-		          <?php $stmt4x = $skoObj->readAll2(); while ($kolom = $stmt4x->fetch(PDO::FETCH_ASSOC)): ?>
+		          <?php $alt3b = $skoObj->readAll2(); while ($kolom = $alt3b->fetch(PDO::FETCH_ASSOC)): ?>
 		            <td>
 		            	<?php
 		                $skoObj->readAll3($kolom['id_alternatif'], $altkriteria);
-		                $jakx = $skoObj->jak;
+										$jumlahBobot = $skoObj->jak;
 			            	if ($baris['id_alternatif'] == $kolom['id_alternatif']) {
-			            		$hs1 = 1/$jakx;
-			            		$skoObj->insert2($hs1, $baris['id_alternatif'], $kolom['id_alternatif'], $altkriteria);
-			            		echo number_format($hs1, 4, '.', ',');
+			            		$n = 1/$jumlahBobot;
+			            		$skoObj->insert2($n, $baris['id_alternatif'], $kolom['id_alternatif'], $altkriteria);
+			            		echo number_format($n, 4, '.', ',');
 			            	} else {
 			            		$skoObj->readAll1($baris['id_alternatif'], $kolom['id_alternatif'], $altkriteria);
-		                  $kpx = $skoObj->kp;
-			            		$jmk = $kpx/$jakx;
-			            		$skoObj->insert2($jmk, $baris['id_alternatif'], $kolom['id_alternatif'], $altkriteria);
-			            		echo number_format($jmk, 4, '.', ',');
+		                  $bobot = $skoObj->kp;
+			            		$n = $bobot/$jumlahBobot;
+			            		$skoObj->insert2($n, $baris['id_alternatif'], $kolom['id_alternatif'], $altkriteria);
+			            		echo number_format($n, 4, '.', ',');
 			            	}
 		            	?>
 		            </td>
@@ -157,9 +158,9 @@ if (isset($altkriteria)) {
 							<th class="success">
 								<?php
 								$skoObj->readAvg($baris['id_alternatif']);
-								$bbt = $skoObj->hak;
-								$skoObj->insert4($bbt, $baris['id_alternatif'], $altkriteria);
-								echo number_format($bbt, 4, '.', ',');
+								$prioritas = $skoObj->hak;
+								$skoObj->insert4($prioritas, $baris['id_alternatif'], $altkriteria);
+								echo number_format($prioritas, 4, '.', ',');
 								?>
 							</th>
 		        </tr>
