@@ -88,17 +88,27 @@ class Alternatif {
 	}
 
 	function getNewID() {
-		$query = "SELECT id_alternatif FROM {$this->table_name} ORDER BY id_alternatif DESC LIMIT 1";
+		$query = "SELECT MAX(id_alternatif) AS code FROM {$this->table_name}";
 		$stmt = $this->conn->prepare($query);
 		$stmt->execute();
-		if ($stmt->rowCount()) {
-			$row = $stmt->fetch(PDO::FETCH_ASSOC);
-			$pcs = explode("A", $row['id_alternatif']);
-			$result = "A".($pcs[1]+1);
+		$row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+		if ($row) {
+			return $this->genCode($row["code"], 'A', 3);
 		} else {
-			$result = "A1";
+			return $this->genCode($nomor_terakhir, 'A', 3);
 		}
-		return $result;
+	}
+
+	function genCode($latest, $key, $chars = 0) {
+    $new = intval(substr($latest, strlen($key))) + 1;
+    $numb = str_pad($new, $chars, "0", STR_PAD_LEFT);
+    return $key . $numb;
+	}
+
+	function genNextCode($start, $key, $chars = 0) {
+    $new = str_pad($start, $chars, "0", STR_PAD_LEFT);
+    return $key . $new;
 	}
 
 	function update() {

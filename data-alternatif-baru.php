@@ -44,7 +44,7 @@ if($_POST){
 				    <form method="post" id="form">
 						  <div class="form-group">
 						    <label for="id_alternatif">ID Alternatif</label>
-						    <input type="text" class="form-control" id="id_alternatif" name="id_alternatif" required readonly="on" value="<?php echo $altObj->getNewID(); ?>">
+						    <input type="text" class="form-control" id="id_alternatif" name="id_alternatif" required readonly="on" value="<?=$altObj->getNewID()?>">
 						  </div>
 							<div class="form-group">
 									<label for="nim">Nomor Induk Mahasiswa</label>

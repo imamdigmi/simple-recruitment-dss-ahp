@@ -18,7 +18,7 @@ while ($row = $alt1->fetch(PDO::FETCH_ASSOC)) {
 	$alt2 = $altObj->readSatu($row['id_alternatif']);
 	while ($roww = $alt2->fetch(PDO::FETCH_ASSOC)) {
 		$pcs = explode("A", $roww['id_alternatif']);
-		$c = $altCount - $pcs[1];
+		$c = (int) $altCount - $pcs[1];
 	}
 	if ($c>=1) {
 		$r[$row['id_alternatif']] = $c;
@@ -114,7 +114,7 @@ while ($row = $alt1->fetch(PDO::FETCH_ASSOC)) {
 									</div>
 									<div class="col-xs-12 col-md-3">
 										<div class="form-group">
-										<?php $pcs = explode("A", $k); $nid = "A".($pcs[1]+$i); ?>
+										<?php $pcs = explode("A", $k); $nid = $altObj->genNextCode($pcs[1]+$i, 'A', 3); ?>
 										<?php $rows = $skoObj->readAlternatif($nid); while ($row = $rows->fetch(PDO::FETCH_ASSOC)): ?>
 											<input type="text" class="form-control" value="<?=$row['nama'] ?>" readonly />
 											<input type="hidden" name="<?=$nid?><?=$no?>" value="<?=$row['id_alternatif'] ?>" />

@@ -30,8 +30,7 @@ if (isset($altkriteria)) {
 		$no=1;
 		foreach ($r as $k => $v) {
 			for ($i=1; $i<=$v; $i++) {
-				$pcs = explode("A", $k);
-				$nid = "A".($pcs[1]+$i);
+				$pcs = explode("A", $k); $nid = $altObj->genNextCode($pcs[1]+$i, 'A', 3);
 				if ($skoObj->insert($_POST[$k.$no], $_POST['nl'.$no], $_POST[$nid.$no], $altkriteria)) {
 					// ...
 				} else {
