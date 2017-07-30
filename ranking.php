@@ -83,7 +83,8 @@ $stmtx2y = $ranObj->readBob();
 			</tbody>
 	  </table>
 		<hr>
-		<h3>Hasil Perankingan</h3>
+
+		<h3>Hasil Akhir</h3>
 		<br/>
 		<table width="100%" class="table table-striped table-bordered">
 	    <thead>
@@ -91,7 +92,6 @@ $stmtx2y = $ranObj->readBob();
 	        <th rowspan="2" class="text-center active">Alternatif</th>
 	        <th colspan="<?php $kri1b = $kriObj->readAll(); echo $kri1b->rowCount(); ?>" class="text-center">Kriteria</th>
 	        <th rowspan="2" class="text-center warning">Hasil Akhir</th>
-	        <th rowspan="2" class="text-center success">Ranking</th>
 	      </tr>
 	      <tr>
 	        <?php $kri2b = $kriObj->readAll(); while ($row = $kri2b->fetch(PDO::FETCH_ASSOC)): ?>
@@ -130,7 +130,6 @@ $stmtx2y = $ranObj->readBob();
 							$ranObj->hasil1();
 							?>
 						</td>
-						<td class="success"></td>
 	        </tr>
 				<?php endwhile; ?>
 				<!-- <tr>
@@ -152,6 +151,30 @@ $stmtx2y = $ranObj->readBob();
 						?>
 					</td>
 				</tr> -->
+	    </tbody>
+	  </table>
+		<hr>
+
+		<h3>Hasil Perankingan</h3>
+		<br>
+		<table width="100%" class="table table-striped table-bordered">
+	    <thead>
+	      <tr>
+					<th>NIM</th>
+					<th>Nama</th>
+					<th>Hasil Akhir</th>
+					<th class="success">Ranking</th>
+	      </tr>
+	    </thead>
+	    <tbody>
+				<?php $rank = 1; $alt1c = $altObj->readByRank(); while ($row = $alt1c->fetch(PDO::FETCH_ASSOC)): ?>
+	        <tr>
+						<td><?=$row["nim"]?></td>
+						<td><?=$row["nama"]?></td>
+						<td><?=number_format($row["hasil_akhir"], 4, '.', ',')?></td>
+						<td class="success"><?=$rank++?></td>
+	        </tr>
+				<?php endwhile; ?>
 	    </tbody>
 	  </table>
 	</div>

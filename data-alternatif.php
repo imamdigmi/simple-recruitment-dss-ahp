@@ -86,18 +86,18 @@ if (isset($_POST['hapus-contengan'])) {
         <tbody>
           <?php $no=1; while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) : ?>
             <tr>
-              <td style="vertical-align:middle;"><input type="checkbox" value="<?php echo $row['id_alternatif'] ?>" name="checkbox[]" /></td>
-              <td style="vertical-align:middle;"><?php echo $row['id_alternatif'] ?></td>
-              <td style="vertical-align:middle;"><?php echo $row['nim'] ?></td>
-              <td style="vertical-align:middle;"><?php echo $row['nama'] ?></td>
-              <td style="vertical-align:middle;"><?php echo $row['tempat_lahir'] ?>, <?php echo $row['tanggal_lahir'] ?></td>
-              <td style="vertical-align:middle;"><?php echo $row['kelamin'] ?></td>
-              <td style="vertical-align:middle;"><?php echo $row['alamat'] ?></td>
-              <td style="vertical-align:middle;"><?php echo $row['no_hp'] ?></td>
-              <td style="vertical-align:middle;"><?php echo $row['hasil_akhir'] ?></td>
-              <td class="text-center" style="vertical-align:middle;">
-            		<a href="data-alternatif-ubah.php?id=<?php echo $row['id_alternatif'] ?>" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
-            		<a href="data-alternatif-hapus.php?id=<?php echo $row['id_alternatif'] ?>" onclick="return confirm('Yakin ingin menghapus data')" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+              <td><input type="checkbox" value="<?=$row['id_alternatif']?>" name="checkbox[]" /></td>
+              <td><?=$row['id_alternatif'] ?></td>
+              <td><?=$row['nim'] ?></td>
+              <td><?=$row['nama'] ?></td>
+              <td><?=$row['tempat_lahir'] ?>, <?=$row['tanggal_lahir'] ?></td>
+              <td><?=$row['kelamin'] ?></td>
+              <td><?=$row['alamat'] ?></td>
+              <td><?=$row['no_hp'] ?></td>
+              <td><?=$row['hasil_akhir'] ?></td>
+              <td class="text-center">
+            		<a href="data-alternatif-ubah.php?id=<?=$row['id_alternatif']?>" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
+            		<a href="data-alternatif-hapus.php?id=<?=$row['id_alternatif']?>" onclick="return confirm('Yakin ingin menghapus data')" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
               </td>
             </tr>
           <?php endwhile; ?>

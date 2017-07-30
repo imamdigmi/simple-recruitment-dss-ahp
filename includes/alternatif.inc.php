@@ -45,6 +45,15 @@ class Alternatif {
 		return $stmt;
 	}
 
+	function readByRank() {
+		// "SELECT nim, nama, hasil_akhir, @curRank := @curRank + 1 AS rank FROM {$this->table_name} a, (SELECT @curRank := 0) r ORDER BY rank";
+		$query = "SELECT * FROM {$this->table_name} ORDER BY hasil_akhir DESC";
+		$stmt = $this->conn->prepare($query);
+		$stmt->execute();
+
+		return $stmt;
+	}
+
 	function countAll(){
 		$query = "SELECT * FROM {$this->table_name} ORDER BY id_alternatif ASC";
 		$stmt = $this->conn->prepare( $query );
