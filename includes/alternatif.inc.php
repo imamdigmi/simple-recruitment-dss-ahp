@@ -46,7 +46,7 @@ class Alternatif {
 	}
 
 	function readByRank() {
-		$query = "SELECT * FROM {$this->table_name} ORDER BY hasil_akhir DESC";
+		$query = "SELECT * FROM {$this->table_name} ORDER BY hasil_akhir DESC LIMIT 0,5";
 		$stmt = $this->conn->prepare($query);
 		$stmt->execute();
 
