@@ -3,6 +3,8 @@
 
 Rekrutmen anggota baru UKM Kesenian STMIK AKAKOM Yogyakarta
 
+![Screenshot Home](screenshot.png "Screenshot Home")
+
 ## Cara menggunakan
 1. Clone repository
   ```
@@ -21,6 +23,9 @@ Rekrutmen anggota baru UKM Kesenian STMIK AKAKOM Yogyakarta
   - Ketua Umum
     - username : ketua
     - password : ketua
+
+
+![Relasi Tabel](relasi.png "Relasi Tabel")
 
 ## Cara melakukan perubahan
 ```
