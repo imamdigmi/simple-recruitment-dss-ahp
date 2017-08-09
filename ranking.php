@@ -28,22 +28,22 @@ $stmtx2y = $ranObj->readBob();
 		</div>
 		<br/>
 		<table width="100%" class="table table-striped table-bordered">
-	    <thead>
-	      <tr>
-	        <th rowspan="3" class="text-center active">Alternatif</th>
-	        <th colspan="<?php $kri1a = $kriObj->readAll(); echo $kri1a->rowCount(); ?>" class="text-center">Kriteria</th>
-	      </tr>
-				<tr>
-					<?php $kri2a = $kriObj->readAll(); while ($row = $kri2a->fetch(PDO::FETCH_ASSOC)): ?>
-						<th><?=$row['nama_kriteria']?></th>
-					<?php endwhile; ?>
-				</tr>
-				<tr class="success">
-					<?php $bobot1 = $ranObj->readBob(); while ($row = $bobot1->fetch(PDO::FETCH_ASSOC)): ?>
-						<td><?=number_format($row['bobot_kriteria'], 4, '.', ',')?></td>
-					<?php endwhile; ?>
-				</tr>
-	    </thead>
+		    <thead>
+		      <tr>
+		        <th rowspan="3" class="text-center active">Alternatif</th>
+		        <th colspan="<?php $kri1a = $kriObj->readAll(); echo $kri1a->rowCount(); ?>" class="text-center">Kriteria</th>
+		      </tr>
+					<tr>
+						<?php $kri2a = $kriObj->readAll(); while ($row = $kri2a->fetch(PDO::FETCH_ASSOC)): ?>
+							<th><?=$row['nama_kriteria']?></th>
+						<?php endwhile; ?>
+					</tr>
+					<tr class="success">
+						<?php $bobot1 = $ranObj->readBob(); while ($row = $bobot1->fetch(PDO::FETCH_ASSOC)): ?>
+							<td><?=number_format($row['bobot_kriteria'], 4, '.', ',')?></td>
+						<?php endwhile; ?>
+					</tr>
+		    </thead>
 			<tbody>
 				<?php $alt1a = $altObj->readAll(); while ($row1 = $alt1a->fetch(PDO::FETCH_ASSOC)): ?>
 					<tr>
@@ -81,102 +81,104 @@ $stmtx2y = $ranObj->readBob();
 					<?php //endwhile; ?>
 				</tr> -->
 			</tbody>
-	  </table>
+		</table>
 		<hr>
 
 		<h3>Hasil Akhir</h3>
 		<br/>
 		<table width="100%" class="table table-striped table-bordered">
-	    <thead>
-	      <tr>
-	        <th rowspan="2" class="text-center active">Alternatif</th>
-	        <th colspan="<?php $kri1b = $kriObj->readAll(); echo $kri1b->rowCount(); ?>" class="text-center">Kriteria</th>
-	        <th rowspan="2" class="text-center warning">Hasil Akhir</th>
-	      </tr>
-	      <tr>
-	        <?php $kri2b = $kriObj->readAll(); while ($row = $kri2b->fetch(PDO::FETCH_ASSOC)): ?>
-	          <th><?=$row['nama_kriteria']?></th>
-	        <?php endwhile; ?>
-	      </tr>
-	    </thead>
-	    <tbody>
-				<?php $alt1b = $altObj->readAll(); while ($row1 = $alt1b->fetch(PDO::FETCH_ASSOC)): ?>
-	        <tr>
-	          <th class="active"><?=$row1['nama']?></th>
-	          <?php $a1 = $row1['id_alternatif']; ?>
-						<?php $kri2b = $kriObj->readAll(); while ($row2 = $kri2b->fetch(PDO::FETCH_ASSOC)): ?>
-							<?php $b2 = $row2['id_kriteria']; ?>
-							<?php $ran1b = $ranObj->readR($a1, $b2); while ($row3 = $ran1b->fetch(PDO::FETCH_ASSOC)): ?>
-	              <td>
-	              	<?php
-	                	$norx = $row3['skor_alt_kri'] * $row2['bobot_kriteria'];
-										//pow($row3['skor_alt_kri'],$bobot);
-										echo number_format($norx, 4, '.', ',');
-										$ranObj->ia = $a1;
-										$ranObj->ik = $b2;
-										$ranObj->nn4 = $norx;
-										$ranObj->normalisasi1();
-	              	?>
-	              </td>
-							<?php endwhile; ?>
-	          <?php endwhile; ?>
-						<td class="warning">
+		    <thead>
+		      <tr>
+		        <th rowspan="2" class="text-center active">Alternatif</th>
+		        <th colspan="<?php $kri1b = $kriObj->readAll(); echo $kri1b->rowCount(); ?>" class="text-center">Kriteria</th>
+		        <th rowspan="2" class="text-center warning">Hasil Akhir</th>
+		      </tr>
+		      <tr>
+		        <?php $kri2b = $kriObj->readAll(); while ($row = $kri2b->fetch(PDO::FETCH_ASSOC)): ?>
+		          <th><?=$row['nama_kriteria']?></th>
+		        <?php endwhile; ?>
+		      </tr>
+		    </thead>
+		    <tbody>
+					<?php $alt1b = $altObj->readAll(); while ($row1 = $alt1b->fetch(PDO::FETCH_ASSOC)): ?>
+		        <tr>
+		          <th class="active"><?=$row1['nama']?></th>
+		          <?php $a1 = $row1['id_alternatif']; ?>
+							<?php $kri2b = $kriObj->readAll(); while ($row2 = $kri2b->fetch(PDO::FETCH_ASSOC)): ?>
+								<?php $b2 = $row2['id_kriteria']; ?>
+								<?php $ran1b = $ranObj->readR($a1, $b2); while ($row3 = $ran1b->fetch(PDO::FETCH_ASSOC)): ?>
+		              <td>
+		              	<?php
+		                	$norx = $row3['skor_alt_kri'] * $row2['bobot_kriteria'];
+											//pow($row3['skor_alt_kri'],$bobot);
+											echo number_format($norx, 4, '.', ',');
+											$ranObj->ia = $a1;
+											$ranObj->ik = $b2;
+											$ranObj->nn4 = $norx;
+											$ranObj->normalisasi1();
+		              	?>
+		              </td>
+								<?php endwhile; ?>
+		          <?php endwhile; ?>
+							<td class="warning">
+								<?php
+								$stmthasil = $ranObj->readHasil1($a1);
+								$hasil = $stmthasil->fetch(PDO::FETCH_ASSOC);
+								echo number_format($hasil['bbn'], 4, '.', ',');
+								$ranObj->ia = $a1;
+								$ranObj->has1 = $hasil['bbn'];
+								$ranObj->hasil1();
+								?>
+							</td>
+		        </tr>
+					<?php endwhile; ?>
+					<!-- <tr>
+						<th>Jumlah</th>
+						<?php //while ($rowx2 = $stmtx2y->fetch(PDO::FETCH_ASSOC)): ?>
+		          <td>
+								<?php
+									// $stmtx3y = $ranObj->readMax($rowx2['id_kriteria']);
+									// $rowx3 = $stmtx3y->fetch(PDO::FETCH_ASSOC);
+									// echo number_format($rowx3['mnr1'], 5, '.', ',');
+								?>
+							</td>
+			      <?php //endwhile; ?>
+						<td>
 							<?php
-							$stmthasil = $ranObj->readHasil1($a1);
-							$hasil = $stmthasil->fetch(PDO::FETCH_ASSOC);
-							echo number_format($hasil['bbn'], 4, '.', ',');
-							$ranObj->ia = $a1;
-							$ranObj->has1 = $hasil['bbn'];
-							$ranObj->hasil1();
+								// $stmtx4y = $ranObj->readMax2();
+								// $rowx4 = $stmtx4y->fetch(PDO::FETCH_ASSOC);
+								// echo number_format($rowx4['mnr2'], 5, '.', ',');
 							?>
 						</td>
-	        </tr>
-				<?php endwhile; ?>
-				<!-- <tr>
-					<th>Jumlah</th>
-					<?php //while ($rowx2 = $stmtx2y->fetch(PDO::FETCH_ASSOC)): ?>
-	          <td>
-							<?php
-								// $stmtx3y = $ranObj->readMax($rowx2['id_kriteria']);
-								// $rowx3 = $stmtx3y->fetch(PDO::FETCH_ASSOC);
-								// echo number_format($rowx3['mnr1'], 5, '.', ',');
-							?>
-						</td>
-		      <?php //endwhile; ?>
-					<td>
-						<?php
-							// $stmtx4y = $ranObj->readMax2();
-							// $rowx4 = $stmtx4y->fetch(PDO::FETCH_ASSOC);
-							// echo number_format($rowx4['mnr2'], 5, '.', ',');
-						?>
-					</td>
-				</tr> -->
-	    </tbody>
-	  </table>
+					</tr> -->
+		    </tbody>
+		  </table>
 		<hr>
 
 		<h3>Hasil Perankingan</h3>
 		<br>
 		<table width="100%" class="table table-striped table-bordered">
-	    <thead>
-	      <tr>
+		    <thead>
+				<tr>
+					<th>No</th>
 					<th>NIM</th>
 					<th>Nama</th>
 					<th>Hasil Akhir</th>
 					<th class="success">Ranking</th>
-	      </tr>
-	    </thead>
-	    <tbody>
-				<?php $rank = 1; $alt1c = $altObj->readByRank(); while ($row = $alt1c->fetch(PDO::FETCH_ASSOC)): ?>
-	        <tr>
+				</tr>
+		    </thead>
+		    <tbody>
+				<?php $no = 1; $rank = 1; $alt1c = $altObj->readByRank(); while ($row = $alt1c->fetch(PDO::FETCH_ASSOC)): ?>
+			        <tr>
+						<td><?=$no++?></td>
 						<td><?=$row["nim"]?></td>
 						<td><?=$row["nama"]?></td>
 						<td><?=number_format($row["hasil_akhir"], 4, '.', ',')?></td>
 						<td class="success"><?=$rank++?></td>
-	        </tr>
+			        </tr>
 				<?php endwhile; ?>
-	    </tbody>
-	  </table>
+		    </tbody>
+		</table>
 	</div>
 </div>
 
